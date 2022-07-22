@@ -1,0 +1,46 @@
+﻿@model Trial.ViewModels.AcademicianViewModel;
+@{
+    
+}
+
+<table id="myTable" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Ünvan</th>
+                <th>İsim</th>
+                <th>Soyisim</th>
+                <th>E-Posta</th>
+                <th>Kimlik No</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Ord.</td>
+                <td>SEREN</td>
+                <td>AKDEMİR</td>
+                <td>serenn.aakdemir@gmail.com</td>
+                <td>4561212530</td>
+            </tr>
+            <tr>
+                <td>Ar.Grv.</td>
+                <td>TOLGA</td>
+                <td>TİTİZ</td>
+                <td>tolga.titiz@bakircay.edu.tr</td>
+                <td>5361256980</td>
+            </tr>
+        @{
+            if(Model.Academicians != null){
+            for(int i = 0; i < Model.Academicians.Count; i++)
+            {
+                <tr>
+                <td>@Model.Academicians.ElementAt(i).Title</td>
+                <td>@Model.Academicians.ElementAt(i).Name</td>
+                <td>@Model.Academicians.ElementAt(i).LastName</td>
+                <td>@Model.Academicians.ElementAt(i).Email</td>
+                <td>@Model.Academicians.ElementAt(i).IdentityNo</td>
+                </tr>
+            }}
+
+            }
+        </tbody>
+    </table>
