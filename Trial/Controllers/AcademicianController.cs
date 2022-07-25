@@ -9,7 +9,7 @@ namespace Trial.Controllers
         List<Academician> modelList = new List<Academician>();
         Academician academician1 = new Academician()
         {
-            Title = "Doç. Dr.",
+            Title = "Ars.Grv",
             Name = "Tolga",
             LastName = "Titiz",
             Email = "tolgatitiz@bakircay.edu.tr",
