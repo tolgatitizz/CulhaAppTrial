@@ -1,6 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Trial.ViewModels.TimeSlotViewModel;
 @{
 }
 
@@ -13,7 +11,7 @@
 	<p class="divider-text">
         <span class="bg-light">Dates</span>
     </p>
-
+    <form asp-action="Select" method="post">
         <table class="table table-striped">
         <thead class="table-dark">
       <tr>
@@ -33,122 +31,48 @@
   <tbody>
       <tr>
         <th scope="row">Day 1</th>
-        <td><input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck1">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck2">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck3">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck4">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck5">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck6" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck6">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck7" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck7">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck8" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck8">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck9" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck9">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck10" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck10">Slot</label></td>
+                            @for(int i = 0; i<10; i++)
+                            {
+                                <td><input type="checkbox" name="btncheck\@i" class="btn-check" value="true" id="btncheck\@i" autocomplete="off">
+                                <label class="btn btn-outline-dark" for="btncheck\@i">Slot</label></td>            
+                            }
       </tr>
       <tr>
       <th scope="row">Day 2</th>
-      <td><input type="checkbox" class="btn-check" id="btncheck11" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck11">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck12" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck12">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck13" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck13">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck14" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck14">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck15" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck15">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck16" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck16">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck17" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck17">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck18" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck18">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck19" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck19">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck20" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck20">Slot</label></td>
+                            @for(int i = 10; i<20; i++)
+                            {
+                                <td><input type="checkbox" class="btn-check" id="btncheck\@i" autocomplete="off">
+                                <label class="btn btn-outline-dark" for="btncheck\@i">Slot</label></td>            
+                            }
     </tr>
           <tr>
       <th scope="row">Day 3</th>
-      <td><input type="checkbox" class="btn-check" id="btncheck21" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck21">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck22" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck22">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck23" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck23">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck24" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck24">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck25" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck25">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck26" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck26">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck27" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck27">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck28" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck28">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck29" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck29">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck30" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck30">Slot</label></td>
+                            @for(int i = 20; i<30; i++)
+                            {
+                                <td><input type="checkbox" class="btn-check" id="btncheck\@i" autocomplete="off">
+                                <label class="btn btn-outline-dark" for="btncheck\@i">Slot</label></td>            
+                            }
     </tr>
           <tr>
       <th scope="row">Day 4</th>
-      <td><input type="checkbox" class="btn-check" id="btncheck31" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck31">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck32" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck32">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck33" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck33">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck34" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck34">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck35" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck35">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck36" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck36">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck37" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck37">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck38" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck38">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck39" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck39">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck40" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck40">Slot</label></td>
+                            @for(int i = 30; i<40; i++)
+                            {
+                                <td><input type="checkbox" class="btn-check" id="btncheck\@i" autocomplete="off">
+                                <label class="btn btn-outline-dark" for="btncheck\@i">Slot</label></td>            
+                            }
     </tr>
           <tr>
       <th scope="row">Day 5</th>
-      <td><input type="checkbox" class="btn-check" id="btncheck41" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck41">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck42" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck42">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck43" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck43">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck44" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck44">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck45" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck45">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck46" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck46">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck47" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck47">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck48" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck48">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck49" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck49">Slot</label></td>
-          <td><input type="checkbox" class="btn-check" id="btncheck50" autocomplete="off">
-  <label class="btn btn-outline-dark" for="btncheck50">Slot</label></td>
+                            @for(int i = 40; i<50; i++)
+                            {
+                                <td><input type="checkbox" class="btn-check" id="btncheck\@i" autocomplete="off">
+                                <label class="btn btn-outline-dark" for="btncheck\@i">Slot</label></td>            
+                            }
     </tr>
   </tbody>
 </table>
-    
+    <button class="btn btn-secondary" value="Submit" type="submit">Submit</button>
+</form>
 </article>
 </div> <!-- card.// -->
 </div> 
