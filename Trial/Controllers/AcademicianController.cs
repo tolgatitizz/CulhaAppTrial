@@ -18,7 +18,7 @@ namespace Trial.Controllers
         };
         Academician academician2 = new Academician()
         {
-            Title = "Doç. Dr.",
+            Title = "Dr.",
             Name = "Seren",
             LastName = "Akdemir",
             Email = "serenakdemir@bakircay.edu.tr",
