@@ -8,19 +8,24 @@ namespace Trial.Controllers
     {
         public IActionResult Index()
         {
-            TimeSlotViewModel timeSlotViewModel = new TimeSlotViewModel();
             return View();
+        }
+        [HttpPost]
+        public IActionResult Index(TimeSlotViewModel btncheck)
+        {
+            return View(btncheck);
         }
         [HttpGet]
         public IActionResult Select()
         {
+
             return View();
         }
         [HttpPost]
-        public IActionResult Select(List<TimeSlot> timeSlot)
+        public IActionResult Select(TimeSlotViewModel btncheck)
         {
-            List<TimeSlot> timeSlots = timeSlot;
-            return View();
+            
+            return View(btncheck);
         }
     }
 }

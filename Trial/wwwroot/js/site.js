@@ -17,3 +17,18 @@ $(document).ready(function () {
 
     });
 });
+
+function butonFunction() {
+    const checkBox = document.getElementsByClassName("filledBox");
+    for (var i = 0; i < checkBox.length; i++) {
+        if (!(checkBox[i].hasAttribute("checked"))) {
+            checkBox[i].setAttribute("checked", "true");
+            
+        } else {
+            checkBox[i].removeAttribute("checked");
+        }
+    }
+
+}
+
+//Yeni Slot Sayfası

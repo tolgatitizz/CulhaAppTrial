@@ -1,5 +1,85 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Trial.ViewModels.TimeSlotViewModel;
 @{
 }
+
+<div class="container">
+<br>  <p class="text-center"> </p>
+<hr>
+<div class="card bg-light">
+<article class="card-body mx-auto" style="">
+	<h4 class="card-title mt-3 text-center">Select Dates</h4>
+	<p class="divider-text">
+        <span class="bg-light">Dates</span>
+    </p>
+    <form asp-action="Select" method="post">
+        <table class="table table-striped">
+        <thead class="table-dark">
+      <tr>
+      <th scope="col">#</th>
+      <th scope="col">TimeSlot1</th>
+      <th scope="col">TimeSlot2</th>
+      <th scope="col">TimeSlot3</th>
+      <th scope="col">TimeSlot4</th>
+      <th scope="col">TimeSlot5</th>
+      <th scope="col">TimeSlot6</th>
+      <th scope="col">TimeSlot7</th>
+      <th scope="col">TimeSlot8</th>
+      <th scope="col">TimeSlot9</th>
+      <th scope="col">TimeSlot10</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <th scope="row">Day 1</th>
+                            @for(int i = 0; i<10; i++)
+                            {
+                                string btnCheck = "btnCheck" + i;
+                                <td><input type="button" name="@btnCheck" onclick="btnFunction()" class="filledBox btn-check" value="@btnCheck" id="@btnCheck" autocomplete="off">
+                                <label class="btn btn-outline-dark" for="@btnCheck">Slot</label></td>            
+                            }
+      </tr>
+      <tr>
+      <th scope="row">Day 2</th>
+                            @for(int i = 10; i<20; i++)
+                            {
+                                string btnCheck = "btnCheck" + i;
+                                <td><input type="button" class="filledBox btn-check" value="false" id="@btnCheck"  autocomplete="off">
+                                <label class="btn btn-outline-dark" for="@btnCheck">Slot</label></td>            
+                            }
+    </tr>
+          <tr>
+      <th scope="row">Day 3</th>
+                            @for(int i = 20; i<30; i++)
+                            {
+                                string btnCheck = "btnCheck" + i;
+                                <td><input type="checkbox" class="filledBox btn-check" value="false" id="@btnCheck"  autocomplete="off">
+                                <label class="btn btn-outline-dark" for="@btnCheck">Slot</label></td>            
+                            }
+    </tr>
+          <tr>
+      <th scope="row">Day 4</th>
+                            @for(int i = 30; i<40; i++)
+                            {
+                                string btnCheck = "btnCheck" + i;
+                                <td><input type="checkbox" class="filledBox btn-check" value="false" id="@btnCheck" autocomplete="off">
+                                <label class="btn btn-outline-dark" for="@btnCheck">Slot</label></td>            
+                            }
+    </tr>
+          <tr>
+      <th scope="row">Day 5</th>
+                            @for(int i = 40; i<50; i++)
+                            {
+                                string btnCheck = "btncheck" + i;
+                                <td><input type="checkbox" class="filledBox btn-check" value="false" id="@btnCheck" autocomplete="off">
+                                <label class="btn btn-outline-dark" for="@btnCheck">Slot</label></td>            
+                            }
+    </tr>
+  </tbody>
+</table>
+    <button class="btn btn-secondary" value="Submit" type="submit">Submit</button>
+    <button class="btn btn-secondary" type="button" onclick="fillClearFunction()">Fill/Clear</button>
+</form>
+</article>
+</div> <!-- card.// -->
+</div> 
+<!--container end.//-->
