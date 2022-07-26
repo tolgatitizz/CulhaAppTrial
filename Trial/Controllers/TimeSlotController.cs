@@ -13,7 +13,7 @@ namespace Trial.Controllers
         [HttpPost]
         public IActionResult Index(TimeSlotViewModel btncheck)
         {
-            return View(btncheck);
+            return View( btncheck);
         }
         [HttpGet]
         public IActionResult Select()
@@ -22,10 +22,10 @@ namespace Trial.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Select(TimeSlotViewModel btncheck)
+        public IActionResult Select(String slotResult)
         {
             
-            return View(btncheck);
+            return View();
         }
     }
 }

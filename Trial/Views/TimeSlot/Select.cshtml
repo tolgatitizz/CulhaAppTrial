@@ -34,8 +34,8 @@
                             @for(int i = 0; i<10; i++)
                             {
                                 string btnCheck = "btnCheck" + i;
-                                <td><input type="button" name="@btnCheck" onclick="btnFunction()" class="filledBox btn-check" value="@btnCheck" id="@btnCheck" autocomplete="off">
-                                <label class="btn btn-outline-dark" for="@btnCheck">Slot</label></td>            
+                                <td>
+                                <label class="filledBox btn btn-outline-dark" for="@btnCheck">Slot</label></td>            
                             }
       </tr>
       <tr>
@@ -43,8 +43,8 @@
                             @for(int i = 10; i<20; i++)
                             {
                                 string btnCheck = "btnCheck" + i;
-                                <td><input type="button" class="filledBox btn-check" value="false" id="@btnCheck"  autocomplete="off">
-                                <label class="btn btn-outline-dark" for="@btnCheck">Slot</label></td>            
+                                <td>
+                                <label class="filledBox btn btn-outline-dark"  for="@btnCheck">Slot</label></td>            
                             }
     </tr>
           <tr>
@@ -52,8 +52,8 @@
                             @for(int i = 20; i<30; i++)
                             {
                                 string btnCheck = "btnCheck" + i;
-                                <td><input type="checkbox" class="filledBox btn-check" value="false" id="@btnCheck"  autocomplete="off">
-                                <label class="btn btn-outline-dark" for="@btnCheck">Slot</label></td>            
+                                <td>
+                                <label class="filledBox btn btn-outline-dark" for="@btnCheck">Slot</label></td>            
                             }
     </tr>
           <tr>
@@ -61,8 +61,8 @@
                             @for(int i = 30; i<40; i++)
                             {
                                 string btnCheck = "btnCheck" + i;
-                                <td><input type="checkbox" class="filledBox btn-check" value="false" id="@btnCheck" autocomplete="off">
-                                <label class="btn btn-outline-dark" for="@btnCheck">Slot</label></td>            
+                                <td>
+                                <label class="filledBox btn btn-outline-dark" for="@btnCheck">Slot</label></td>            
                             }
     </tr>
           <tr>
@@ -70,14 +70,14 @@
                             @for(int i = 40; i<50; i++)
                             {
                                 string btnCheck = "btncheck" + i;
-                                <td><input type="checkbox" class="filledBox btn-check" value="false" id="@btnCheck" autocomplete="off">
-                                <label class="btn btn-outline-dark" for="@btnCheck">Slot</label></td>            
+                                <td>
+                                <label class="filledBox btn btn-outline-dark" for="@btnCheck">Slot</label></td>            
                             }
     </tr>
   </tbody>
 </table>
-    <button class="btn btn-secondary" value="Submit" type="submit">Submit</button>
-    <button class="btn btn-secondary" type="button" onclick="fillClearFunction()">Fill/Clear</button>
+    <input type="hidden" name="slotResult" value="" id="slotResult">
+    <button class="btn btn-secondary" type="submit">Submit</button>
 </form>
 </article>
 </div> <!-- card.// -->

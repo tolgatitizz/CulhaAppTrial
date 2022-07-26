@@ -32,3 +32,34 @@ function butonFunction() {
 }
 
 //Yeni Slot Sayfası
+function btnFunction(){
+
+}
+var slotResult = document.getElementById("slotResult");
+var checkedList = [];
+var elements = document.getElementsByClassName("filledBox");
+for (var i = 0; i < elements.length; i++) {
+    elements[i].addEventListener('click', function (e) {
+        console.log(e.target);
+        if (checkedList.includes(e.target.getAttribute("for"))) {
+            e.target.setAttribute("class", "btn btn-outline-dark");
+        }
+        e.target.setAttribute("class", "btn btn-secondary");
+        var id = e.target.getAttribute("for");
+        console.log(id);
+        if (checkedList.includes(id)) {
+            checkedList.pop(id);
+        }
+        else {
+            checkedList.push(id);
+        }
+        console.log(checkedList);
+
+        var checkListString = "";
+
+        for (var i = 0; i < checkedList.length; i++) {
+            checkListString += checkedList[i] + " ";
+        }
+        slotResult.setAttribute("value", checkListString);
+    });
+};
