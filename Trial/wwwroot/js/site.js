@@ -35,26 +35,33 @@ function butonFunction() {
 function btnFunction(){
 
 }
+
 var slotResult = document.getElementById("slotResult");
 var checkedList = [];
-var elements = document.getElementsByClassName("filledBox");
+
+//Aktif Etmek
+var elements = document.getElementsByClassName("cleanBox");
 for (var i = 0; i < elements.length; i++) {
     elements[i].addEventListener('click', function (e) {
         console.log(e.target);
-        if (checkedList.includes(e.target.getAttribute("for"))) {
-            e.target.setAttribute("class", "btn btn-outline-dark");
+        e.target.getAttribute("class");
+        if (e.target.getAttribute("class") === "btn btn-primary filledBox") {
+            e.target.setAttribute("class",  "btn btn-outline-dark cleanBox");
+        } else {
+            e.target.setAttribute("class", "btn btn-primary filledBox");
         }
-        e.target.setAttribute("class", "btn btn-secondary");
+
+        
+        console.log(e.target.getAttribute("class"));
         var id = e.target.getAttribute("for");
-        console.log(id);
         if (checkedList.includes(id)) {
-            checkedList.pop(id);
+            var index = checkedList.indexOf(id, 0);
+            checkedList.splice(index, 1);
         }
         else {
             checkedList.push(id);
         }
         console.log(checkedList);
-
         var checkListString = "";
 
         for (var i = 0; i < checkedList.length; i++) {
