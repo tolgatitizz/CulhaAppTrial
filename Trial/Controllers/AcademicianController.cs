@@ -2,6 +2,7 @@
 using Trial.Models;
 using Trial.ViewModels;
 
+
 namespace Trial.Controllers
 {
     public class AcademicianController : Controller
@@ -95,5 +96,6 @@ namespace Trial.Controllers
         {
             return View();
         }
+
     }
 }
