@@ -1,37 +1,199 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿
+<h1>Ders Programı</h1>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <form action="/Movies/Edit/7" method="post">
-    <div class="form-horizontal">
-        <h4>Movie</h4>
-        <hr />
-        <div class="text-danger" />
-        <input type="hidden" data-val="true" data-val-required="The ID field is required." id="ID" name="ID" value="7" />
-        <div class="form-group">
-            <label class="control-label col-md-2" for="Genre" />
-            <div class="col-md-10">
-                <input class="form-control" type="text" id="Genre" name="Genre" value="Western" />
-                <span class="text-danger field-validation-valid" data-valmsg-for="Genre" data-valmsg-replace="true"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-2" for="Price" />
-            <div class="col-md-10">
-                <input class="form-control" type="text" data-val="true" data-val-number="The field Price must be a number." data-val-required="The Price field is required." id="Price" name="Price" value="3.99" />
-                <span class="text-danger field-validation-valid" data-valmsg-for="Price" data-valmsg-replace="true"></span>
-            </div>
-        </div>
-        <!-- Markup removed for brevity -->
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-    <input name="__RequestVerificationToken" type="hidden" value="CfDJ8Inyxgp63fRFqUePGvuI5jGZsloJu1L7X9le1gy7NCIlSduCRx9jDQClrV9pOTTmqUyXnJBXhmrjcUVDJyDUMm7-MF_9rK8aAZdRdlOri7FmKVkRe_2v5LIHGKFcTjPrWPYnc9AdSbomkiOSaTEg7RU" />
-</form>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<table id="ders-programi">
+  <tr>
+    <th></th>
+    <th>Slot1</th>
+    <th>Slot2</th>
+    <th>Slot3</th>
+    <th>Slot4</th>
+    <th>Slot5</th>
+    <th>Slot6</th>
+    <th>Slot7</th>
+    <th>Slot8</th>
+    <th>Slot9</th>
+    <th>Slot10</th>
+    
+     
+  </tr>
+  <tr>
+    <td>day1</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    
+  </tr>
+  <tr>
+     <td>day2</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+     <td>day3</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>day4</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>day5</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  
+</table>
+
+<br>
+<br>
+
+
+
+<div class="container mt-3">
+                               
+  <div class="dropdown">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+      Bölüm seçiniz
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">Bilgisayar Mühendisliği</a></li>
+      <li><a class="dropdown-item" href="#">Huhuk</a></li>
+      <li><a class="dropdown-item" href="#">Adalet</a></li>
+    </ul>
+  </div>
 </div>
+
+
+
+<h1>Bölüm Ders Programı</h1>
+
+
+
+<table id="ders-programi">
+
+  <tr>
+    <th></th>
+    <th>slot1</th>
+    <th>slot2</th>
+    <th>slot3</th>
+    <th>slot4</th>
+    <th>slot5</th>
+    <th>slot6</th>
+    <th>slot7</th>
+    <th>slot8</th>
+    <th>slot9</th>
+    <th>slot10</th>
+  </tr>
+  <tr>
+    <td>day1</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td> 
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>day2</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td> 
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>day3</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td> 
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>day4</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td> 
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+   <td>day5</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td> 
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  
+</table>
+
+
+
+

@@ -52,3 +52,92 @@ body {
     color: #fff;
 }
 /*Add Academician Page End*/
+
+/*Ders programý tablosu baþlangýcý*/
+#ders-programi {
+    font: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+    #ders-programi td, #ders-programi th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    #ders-programi tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #ders-programi tr:hover {
+        background-color: #ddd;
+    }
+
+    #ders-programi th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #00ffff;
+        color: white;
+    }
+    /*Ders programý tablosu bitiþi*/
+
+    /*Günlere göre derslik ders programý baþlangýcý*/
+#ders-programi {
+    font: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+    #ders-programi td, #ders-programi th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    #ders-programi tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #ders-programi tr:hover {
+        background-color: #ddd;
+    }
+
+    #ders-programi th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #00ffff;
+        color: white;
+    }
+/*Günlere göre derslik ders programý bitiþi*/
+
+
+/*Bölüm ders programý tablosu baþlangýcý*/
+#ders-programi {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+    #ders-programi td, #ders-programi th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    #ders-programi tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #ders-programi tr:hover {
+        background-color: #ddd;
+    }
+
+
+    #ders-programi th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #00ffff;
+        color: black;
+    }
+/*Bölüm ders programý tablosu bitiþi*/
