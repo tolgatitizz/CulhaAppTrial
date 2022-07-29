@@ -21,56 +21,6 @@ namespace Trial.Controllers
         public IActionResult Select()
         {
             List<Academician> modelList = new List<Academician>();
-            Academician academician1 = new Academician()
-            {
-                Title = "Ars.Grv",
-                Name = "Tolga",
-                LastName = "Titiz",
-                Email = "tolgatitiz@bakircay.edu.tr",
-                IdentityNo = "3211234554",
-                IsAssistant = true,
-            };
-            Academician academician2 = new Academician()
-            {
-                Title = "Dr.",
-                Name = "Seren",
-                LastName = "Akdemir",
-                Email = "serenakdemir@bakircay.edu.tr",
-                IdentityNo = "4566548778",
-                IsAssistant = true,
-            };
-            Academician academician3 = new Academician()
-            {
-                Title = "Doç. Dr.",
-                Name = "Deniz",
-                LastName = "Turan",
-                Email = "denizturan@bakircay.edu.tr",
-                IdentityNo = "7899876556",
-                IsAssistant = false,
-            };
-            Academician academician4 = new Academician()
-            {
-                Title = "Dr.",
-                Name = "Simge",
-                LastName = "Urgen",
-                Email = "simgeurgen@bakircay.edu.tr",
-                IdentityNo = "1477412552",
-                IsAssistant = true,
-            };
-            Academician academician5 = new Academician()
-            {
-                Title = "Prof. Dr.",
-                Name = "Emre",
-                LastName = "Turan",
-                Email = "emreturan@bakircay.edu.tr",
-                IdentityNo = "3698526545",
-                IsAssistant = false,
-            };
-            modelList.Add(academician1);
-            modelList.Add(academician2);
-            modelList.Add(academician3);
-            modelList.Add(academician4);
-            modelList.Add(academician5);
             TimeSlotViewModel timeSlotViewModel = new TimeSlotViewModel() { academicians = modelList};
             
             return View(timeSlotViewModel);

@@ -17,7 +17,7 @@
             <select asp-for="academicians" name ="academicianId" class="" style="max-width: 120px;">
 		    @foreach (var i in Model.academicians)
       {
-          <option class="" value="@i.Id">@i.Title @i.Name @i.LastName</option>
+          <option class="" value="@i.Id">@i.Title @i.FirstName @i.LastName</option>
       }
 		</select>
         </div>

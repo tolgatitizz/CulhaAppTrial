@@ -2,7 +2,7 @@
 
 namespace Trial.Controllers
 {
-    public class CampusController : Controller
+    public class ClassroomController : Controller
     {
         public IActionResult Index()
         {

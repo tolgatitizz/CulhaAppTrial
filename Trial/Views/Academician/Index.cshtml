@@ -14,27 +14,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Ord.</td>
-                <td>SEREN</td>
-                <td>AKDEMİR</td>
-                <td>serenn.aakdemir@gmail.com</td>
-                <td>4561212530</td>
-            </tr>
-            <tr>
-                <td>Ar.Grv.</td>
-                <td>TOLGA</td>
-                <td>TİTİZ</td>
-                <td>tolga.titiz@bakircay.edu.tr</td>
-                <td>5361256980</td>
-            </tr>
+
+
         @{
             if(Model.Academicians != null){
             for(int i = 0; i < Model.Academicians.Count; i++)
             {
                 <tr>
                 <td>@Model.Academicians.ElementAt(i).Title</td>
-                <td>@Model.Academicians.ElementAt(i).Name</td>
+                <td>@Model.Academicians.ElementAt(i).FirstName</td>
                 <td>@Model.Academicians.ElementAt(i).LastName</td>
                 <td>@Model.Academicians.ElementAt(i).Email</td>
                 <td>@Model.Academicians.ElementAt(i).IdentityNo</td>
@@ -44,3 +32,61 @@
             }
         </tbody>
     </table>
+
+    <div class="container">
+<br>  <p class="text-center"> </p>
+<hr>
+<div class="card bg-light">
+<article class="card-body mx-auto" style="max-width: 400px;">
+	<h4 class="card-title mt-3 text-center">Add Academician</h4>
+	<p class="divider-text">
+        <span class="bg-light">Bilgiler</span>
+    </p>
+	<form asp-action="AddAcademician" method="post">
+	<div class="form-group input-group p-1">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa-regular fa-a p-1"></i> </span>
+		</div>
+		<select asp-for="Academician.Title" name="Title" class="custom-select" style="max-width: 120px;">
+		    <option selected="Ar. Grv.">Ar. Grv.</option>
+		    <option value="Dr.">Dr.</option>
+		    <option value="Doç. Dr.">Doç. Dr.</option>
+		    <option value="Prof. Dr.">Prof. Dr.</option>
+		</select>
+    	<input asp-for="academicianRequestModel.FirstName" name="FirstName" class="form-control" placeholder="İsim" type="text">
+        <input asp-for="academicianRequestModel.LastName" name="LastName" class="form-control" placeholder="Soyisim" type="text">
+    </div> <!-- form-group// -->
+    <div class="form-group input-group p-1">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa-regular fa-envelope p-1"></i> </span>
+		 </div>
+        <input asp-for="academicianRequestModel.Email" name="Email" class="form-control" placeholder="E-Posta Adresi" type="email">
+    </div> <!-- form-group// -->
+	<div class="form-group input-group p-1">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-address-card p-1"></i> </span>
+		 </div>
+        <input asp-for="academicianRequestModel.IdentityNo" name="IdentityNo" class="form-control" placeholder="Kimlik No" type="text">
+    </div>
+    <!-- Button Group-->
+    <label asp-for="academicianRequestModel.IsAssistant" class="px-1" >Asistan mı?</label>
+    <div class="w-100 btn-group p-1" role="group" aria-label="Basic radio toggle button group">
+  <input  type="radio" class="btn-check" name="btnradio" value="true" id="btnradio1" autocomplete="off" checked>
+  <label asp-for="academicianRequestModel.IsAssistant" class="btn btn-outline-primary" for="btnradio1" >Asistan</label>
+
+  <input asp-for="Academician.IsAssistant" type="radio" class="btn-check" name="btnradio" value="false" id="btnradio2" autocomplete="off">
+  <label class="btn btn-outline-primary" for="btnradio2">Asistan Değil</label>
+</div>      
+    <!--Button Group End-->
+        <button type="submit" class="p-1 w-100 btn btn-primary btn-block"> Kaydet  </button>
+<!-- form-group// -->      
+                                                             
+</form>
+</article>
+</div> <!-- card.// -->
+
+</div> 
+<!--container end.//-->
+
+<br>  <p class="text-center"> </p>
+<hr>
