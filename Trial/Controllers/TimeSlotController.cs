@@ -85,7 +85,7 @@ namespace Trial.Controllers
             }
             for (int i = 0; i < slotList.Length; i++)
             {
-                academicianConstraints.Add(new Academician_ConstraintsRequestModel() { AcademicianId = academicianIdInt , Description = description, TımeSlotId = slotListInt.ElementAt(i)});
+                academicianConstraints.Add(new Academician_ConstraintsRequestModel() { AcademicianId = academicianIdInt , Description = description, TimeSlotId = slotListInt.ElementAt(i)});
             }
 
             using (var client = new HttpClient())
