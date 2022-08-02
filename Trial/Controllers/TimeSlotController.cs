@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using Trial.APIViewModels;
 using Trial.Models;
 using Trial.ViewModels;
 
@@ -6,35 +9,69 @@ namespace Trial.Controllers
 {
     public class TimeSlotController : Controller
     {
+        string Baseurl = "http://10.35.0.104:3535/";
         public IActionResult Index()
         {
             TimeSlotViewModel viewModel = new TimeSlotViewModel();
             return View(viewModel);
         }
+
+
         [HttpGet]
         public IActionResult Index(TimeSlotViewModel viewModel)
         {
 
             return View(viewModel);
         }
+
+
         [HttpGet]
         public IActionResult Select()
         {
-            List<Academician> modelList = new List<Academician>();
-            TimeSlotViewModel timeSlotViewModel = new TimeSlotViewModel() { academicians = modelList};
-            
+
+            return RedirectToAction("Index","Academician");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Select(Academician academician)
+        {
+            List<TimeSlot>? timeSlots = new List<TimeSlot>();
+            using (var client = new HttpClient())
+            {
+                //Passing service base url
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                //Define request data format
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                //Sending request to find web api REST service resource GetAllEmployees using HttpClient
+                HttpResponseMessage Res = await client.GetAsync("api/timeslot");
+                //Checking the response is successful or not which is sent using HttpClient
+                if (Res.IsSuccessStatusCode)
+                {
+                    //Storing the response details recieved from web api
+                    var timeSlotRes = Res.Content.ReadAsStringAsync().Result;
+                    //Deserializing the response recieved from web api and storing into the Employee list
+                    timeSlots = JsonConvert.DeserializeObject<List<TimeSlot>>(timeSlotRes);
+                }
+            }
+            TimeSlotViewModel timeSlotViewModel = new TimeSlotViewModel() { Academician = academician , TimeSlots = timeSlots , rowCount =5, columnCount = 10 };
             return View(timeSlotViewModel);
         }
+
+
         [HttpPost]
-        public IActionResult Select(String academicianId , String slotResult , String description)
+        public async Task<IActionResult> Select(String academicianId , String slotResult , String description)
         {
-            List<TimeSlot> list = new List<TimeSlot>();
-            List<Academician_Constraint> academicianConstraints = new List<Academician_Constraint>();
-            string[] slotList = slotResult.Split(" ");
+            List<Academician_ConstraintsRequestModel> academicianConstraints = new List<Academician_ConstraintsRequestModel>();
+            string[] slotList = new string[0];
+            if (slotResult != "")
+            {
+               slotList = slotResult.Split(" ");
+            }
             List<int> slotListInt = new List<int>();
             int academicianIdInt = 0;
             int.TryParse(academicianId, out academicianIdInt);
-            slotList.ElementAt(2);
             
             for (int i = 0; i < slotList.Length; i++)
             {
@@ -42,56 +79,27 @@ namespace Trial.Controllers
                 int.TryParse(slotList[i], out chk);
                 slotListInt.Add(chk);
             }
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < slotList.Length; i++)
             {
-                
-                int day=0;
-                if (i >= 40)
-                {
-                    day = 4;
-                }
-                else if(i >= 30)
-                {
-                    day = 3;
-                }
-                else if (i >= 20)
-                {
-                    day=2;  
-                }
-                else if (i >= 10)
-                {
-                    day=1;
-                }
-                else if (i < 10)
-                {
-                    day = 0;
-                }
-                string btnCheck = "btnCheck" + i;
-                if (!slotListInt.Contains(i))
-                {
-                    TimeSlot timeSlot = new TimeSlot()
-                    {
-                        Id = i,
-                        Day = day,
-                        Slot = i,
-                        Description = description,
-                    };
-                    list.Add(timeSlot);
-                }  
+                academicianConstraints.Add(new Academician_ConstraintsRequestModel() { AcademicianId = academicianIdInt , Description = description, TımeSlotId = slotListInt.ElementAt(i)});
             }
-            for(int i = 0; i < list.Count; i++)
-            {
-                Academician_Constraint academician_Constraint = new Academician_Constraint() {
-                    AcademicianId = academicianIdInt,
-                    Description = list[i].Description,
-                    TımeSlotId = list[i].Id,
-                };
-                academicianConstraints.Add(academician_Constraint);
-            }
-            Console.WriteLine(list);
-            TimeSlotViewModel viewModel = new TimeSlotViewModel() {academician_Constraints = academicianConstraints };    
 
-  
+            using (var client = new HttpClient())
+            {
+                //Passing service base url
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                //Define request data format
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                //Sending request to find web api REST service resource  using HttpClient
+                var academicianJson = JsonConvert.SerializeObject(academicianConstraints);
+                var requestContent = new StringContent(academicianJson, System.Text.Encoding.UTF8, "application/json");
+                //Checking the response is successful or not which is sent using HttpClient
+                var response = await client.PostAsync("api/academician_", requestContent);
+                response.EnsureSuccessStatusCode();
+            }
+            TimeSlotViewModel viewModel = new TimeSlotViewModel();    
+
             return RedirectToAction("Index", "TimeSlot" , viewModel);
         }
     }

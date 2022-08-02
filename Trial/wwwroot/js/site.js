@@ -40,19 +40,18 @@ var slotResult = document.getElementById("slotResult");
 var checkedList = [];
 
 //Aktif Etmek
-var elements = document.getElementsByClassName("cleanBox");
+var elements = document.getElementsByClassName("availableBox");
 for (var i = 0; i < elements.length; i++) {
     elements[i].addEventListener('click', function (e) {
         console.log(e.target);
         e.target.getAttribute("class");
-        if (e.target.getAttribute("class") === "btn btn-primary filledBox") {
-            e.target.setAttribute("class",  "btn btn-outline-dark cleanBox");
+        if (e.target.getAttribute("class") === "btn btn-success availableBox") {
+            e.target.setAttribute("class",  "btn btn-danger busyBox");
         } else {
-            e.target.setAttribute("class", "btn btn-primary filledBox");
+            e.target.setAttribute("class", "btn btn-success availableBox");
         }
 
         
-        console.log(e.target.getAttribute("class"));
         var id = e.target.getAttribute("for");
         if (checkedList.includes(id)) {
             var index = checkedList.indexOf(id, 0);
@@ -70,3 +69,31 @@ for (var i = 0; i < elements.length; i++) {
         slotResult.setAttribute("value", checkListString);
     });
 };
+document.getElementById("allAvailable").addEventListener('click', function (e) {
+    var slots = document.getElementsByClassName("busyBox");
+    console.log(slots.length);
+    var itemIds=[];
+    for (var i = 0; i < slots.length; i++) {
+        itemIds.push(slots[i].getAttribute("for"));
+    }
+    console.log(itemIds.length)
+    for (var i = 0; i < itemIds.length; i++) {
+        document.getElementById(itemIds[i]).setAttribute("class", "btn btn-success availableBox");
+        checkedList.pop();
+    }
+    console.log(checkedList);
+});
+document.getElementById("allBusy").addEventListener('click', function (e) {
+    var slots = document.getElementsByClassName("availableBox");
+    console.log(slots.length);
+    var itemIds = [];
+    for (var i = 0; i < slots.length; i++) {
+        itemIds.push(slots[i].getAttribute("for"));
+    }
+    console.log(itemIds.length)
+    for (var i = 0; i < itemIds.length; i++) {
+        document.getElementById(itemIds[i]).setAttribute("class", "btn btn-danger busyBox");
+        checkedList.push(itemIds[i]);
+    }
+    console.log(checkedList);
+});

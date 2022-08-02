@@ -7,20 +7,12 @@
 <hr>
 <div class="card bg-light">
 <article class="card-body mx-auto" style="">
-	<h4 class="card-title mt-3 text-center">Select Dates</h4>
+	<h4 class="card-title mt-3 text-center">Select Slots</h4>
 	<p class="divider-text">
-        <span class="bg-light">Dates</span>
+        <span class="bg-light">Slots</span>
     </p>
     <form asp-action="Select" method="post">
 
-        <div class="btn-group">
-            <select asp-for="academicians" name ="academicianId" class="" style="max-width: 120px;">
-		    @foreach (var i in Model.academicians)
-      {
-          <option class="" value="@i.Id">@i.Title @i.FirstName @i.LastName</option>
-      }
-		</select>
-        </div>
         
         <br>
 
@@ -28,70 +20,43 @@
         <thead class="table-dark">
       <tr>
       <th scope="col">#</th>
-      <th scope="col">TimeSlot1</th>
-      <th scope="col">TimeSlot2</th>
-      <th scope="col">TimeSlot3</th>
-      <th scope="col">TimeSlot4</th>
-      <th scope="col">TimeSlot5</th>
-      <th scope="col">TimeSlot6</th>
-      <th scope="col">TimeSlot7</th>
-      <th scope="col">TimeSlot8</th>
-      <th scope="col">TimeSlot9</th>
-      <th scope="col">TimeSlot10</th>
-    </tr>
+                            @for(int i=0; i < Model.columnCount ; i++)
+                            {
+                                <th>
+                                    @(i+1) <span>. Column</span> 
+                                </th>
+                            }
+                        </tr>
   </thead>
   <tbody>
-      <tr>
-        <th scope="row">Day 1</th>
-                            @for(int i = 0; i<10; i++)
-                            {
-                                string btnCheck = "" + i;
-                                <td>
-                                <label class="cleanBox btn btn-outline-dark" for="@btnCheck">Slot</label></td>            
-                            }
-      </tr>
-      <tr>
-      <th scope="row">Day 2</th>
-                            @for(int i = 10; i<20; i++)
-                            {
-                                string btnCheck = "" + i;
-                                <td>
-                                <label class="cleanBox btn btn-outline-dark"  for="@btnCheck">Slot</label></td>            
-                            }
-    </tr>
-          <tr>
-      <th scope="row">Day 3</th>
-                            @for(int i = 20; i<30; i++)
-                            {
-                                string btnCheck = "" + i;
-                                <td>
-                                <label class="cleanBox btn btn-outline-dark" for="@btnCheck">Slot</label></td>            
-                            }
-    </tr>
-          <tr>
-      <th scope="row">Day 4</th>
-                            @for(int i = 30; i<40; i++)
-                            {
-                                string btnCheck = "" + i;
-                                <td>
-                                <label class="cleanBox btn btn-outline-dark" for="@btnCheck">Slot</label></td>            
-                            }
-    </tr>
-          <tr>
-      <th scope="row">Day 5</th>
-                            @for(int i = 40; i<50; i++)
-                            {
-                                string btnCheck = "" + i;
-                                <td>
-                                <label class="cleanBox btn btn-outline-dark" for="@btnCheck">Slot</label></td>            
-                            }
-    </tr>
+                        @for(int i=0 ;i< Model.rowCount;i++)
+                        {
+                            <tr>
+                                <th>
+                                        @Model.TimeSlots.ElementAt(i*Model.columnCount).Description
+                                </th>
+                                @for (var j = 0; j < Model.columnCount; j++)
+                                {
+                                    <td>
+                                        <label class="btn btn-success availableBox" id="@Model.TimeSlots.ElementAt((Model.columnCount*i)+j).Id" for="@Model.TimeSlots.ElementAt((Model.columnCount*i)+j).Id">Slot</label>
+                                    </td>
+                                }
+                            </tr>
+                        }
+                        
   </tbody>
 </table>
-
+    <div class="button-group">
+        <button id="allAvailable"  type="button" class="btn btn-success btn-sm">Tümünü Müsait Seç</button>
+        <button id="allBusy" type="button" class="btn btn-danger btn-sm">Tümünü Meşgul Seç</button>
+    </div>
+    <br/>
+    
     <label for="exampleFormControlTextarea1" class="form-label">Tanımlama</label>
   <textarea class="form-control" name="description" id="description" rows="3"></textarea>
     <input type="hidden" name="slotResult" value="" id="slotResult">
+    <input type="hidden" name="academicianId" value="@Model.Academician.Id" id="academicianId">
+    <input type="hidden" name="timeSlots" value="@Model.TimeSlots" id="academicianId">
         <br/>
     <button class="btn btn-secondary" type="submit">Submit</button>
 </form>

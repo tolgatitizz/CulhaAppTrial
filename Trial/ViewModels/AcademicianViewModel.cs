@@ -7,6 +7,6 @@ namespace Trial.ViewModels
     {
         public List<Academician>? Academicians { get; set; }
         public Academician? Academician { get; set; }
-        public AcademicianRequestModel? academicianRequestModel { get; set; }
+        public AcademicianRequestModel? AcademicianRequestModel { get; set; }
     }
 }

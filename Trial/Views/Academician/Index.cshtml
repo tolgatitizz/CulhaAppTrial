@@ -6,11 +6,12 @@
 <table id="myTable" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
+                <th>Profil</th>
                 <th>Ünvan</th>
                 <th>İsim</th>
                 <th>Soyisim</th>
                 <th>E-Posta</th>
-                <th>Kimlik No</th>
+                <th>Zaman Çizelgesi</th>
             </tr>
         </thead>
         <tbody>
@@ -21,11 +22,16 @@
             for(int i = 0; i < Model.Academicians.Count; i++)
             {
                 <tr>
+                <th>
+                <form><label for="@Model.Academicians.ElementAt(i).Id" class="btn btn-warning" >Profil</label><input class="visually-hidden" id="@Model.Academicians.ElementAt(i).Id" type="submit"  asp-controller="profile" asp-action="Index" method="get" value="@Model.Academicians.ElementAt(i).Id.ToString()" /></form>
+                </th>
                 <td>@Model.Academicians.ElementAt(i).Title</td>
                 <td>@Model.Academicians.ElementAt(i).FirstName</td>
                 <td>@Model.Academicians.ElementAt(i).LastName</td>
                 <td>@Model.Academicians.ElementAt(i).Email</td>
-                <td>@Model.Academicians.ElementAt(i).IdentityNo</td>
+                <td>
+                <form><label for="@Model.Academicians.ElementAt(i).FirstName" class="btn btn btn-success w-100" >Slots</label><input class="visually-hidden" id="@Model.Academicians.ElementAt(i).FirstName" type="submit"  asp-controller="TimeSlot" asp-action="Select" method="get" value="@Model.Academicians.ElementAt(i)" /></form>
+                </td>
                 </tr>
             }}
 
@@ -53,28 +59,28 @@
 		    <option value="Doç. Dr.">Doç. Dr.</option>
 		    <option value="Prof. Dr.">Prof. Dr.</option>
 		</select>
-    	<input asp-for="academicianRequestModel.FirstName" name="FirstName" class="form-control" placeholder="İsim" type="text">
-        <input asp-for="academicianRequestModel.LastName" name="LastName" class="form-control" placeholder="Soyisim" type="text">
+    	<input asp-for="AcademicianRequestModel.FirstName" name="FirstName" class="form-control" placeholder="İsim" type="text">
+        <input asp-for="AcademicianRequestModel.LastName" name="LastName" class="form-control" placeholder="Soyisim" type="text">
     </div> <!-- form-group// -->
     <div class="form-group input-group p-1">
     	<div class="input-group-prepend">
 		    <span class="input-group-text"> <i class="fa-regular fa-envelope p-1"></i> </span>
 		 </div>
-        <input asp-for="academicianRequestModel.Email" name="Email" class="form-control" placeholder="E-Posta Adresi" type="email">
+        <input asp-for="AcademicianRequestModel.Email" name="Email" class="form-control" placeholder="E-Posta Adresi" type="email">
     </div> <!-- form-group// -->
 	<div class="form-group input-group p-1">
     	<div class="input-group-prepend">
 		    <span class="input-group-text"> <i class="fa fa-address-card p-1"></i> </span>
 		 </div>
-        <input asp-for="academicianRequestModel.IdentityNo" name="IdentityNo" class="form-control" placeholder="Kimlik No" type="text">
+        <input asp-for="AcademicianRequestModel.IdentityNo" name="IdentityNo" class="form-control" placeholder="Kimlik No" type="text">
     </div>
     <!-- Button Group-->
-    <label asp-for="academicianRequestModel.IsAssistant" class="px-1" >Asistan mı?</label>
+    <label asp-for="AcademicianRequestModel.IsAssistant" class="px-1" >Asistan mı?</label>
     <div class="w-100 btn-group p-1" role="group" aria-label="Basic radio toggle button group">
   <input  type="radio" class="btn-check" name="btnradio" value="true" id="btnradio1" autocomplete="off" checked>
-  <label asp-for="academicianRequestModel.IsAssistant" class="btn btn-outline-primary" for="btnradio1" >Asistan</label>
+  <label asp-for="AcademicianRequestModel.IsAssistant" class="btn btn-outline-primary" for="btnradio1" >Asistan</label>
 
-  <input asp-for="Academician.IsAssistant" type="radio" class="btn-check" name="btnradio" value="false" id="btnradio2" autocomplete="off">
+  <input asp-for="AcademicianRequestModel.IsAssistant" type="radio" class="btn-check" name="btnradio" value="false" id="btnradio2" autocomplete="off">
   <label class="btn btn-outline-primary" for="btnradio2">Asistan Değil</label>
 </div>      
     <!--Button Group End-->
