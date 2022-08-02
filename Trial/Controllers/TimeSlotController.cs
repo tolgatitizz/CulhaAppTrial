@@ -26,8 +26,8 @@ namespace Trial.Controllers
 
 
 
-        [HttpGet]
-        public async Task<IActionResult> Select(Academician academician)
+        [Route("TimeSlot/Select/academicianId")]
+        public async Task<IActionResult> Select(int academicianId)
         {
             if (!ModelState.IsValid)
             {
@@ -52,13 +52,13 @@ namespace Trial.Controllers
                     timeSlots = JsonConvert.DeserializeObject<List<TimeSlot>>(timeSlotRes);
                 }
             }
-            TimeSlotViewModel timeSlotViewModel = new TimeSlotViewModel() { Academician = academician , TimeSlots = timeSlots , rowCount =5, columnCount = 10 };
+            TimeSlotViewModel timeSlotViewModel = new TimeSlotViewModel() { AcademicianId = academicianId, TimeSlots = timeSlots , rowCount =5, columnCount = 10 };
             return View(timeSlotViewModel);
         }
 
 
-        [HttpPost]
-        public async Task<IActionResult> Select(String academicianId , String slotResult ="" , String description ="ee")
+        [HttpPost("TimeSlot/Select/academicianId")]  
+        public async Task<IActionResult> Select(int academicianId , String slotResult ="" , String description ="ee")
         {
             List<Academician_ConstraintsRequestModel> academicianConstraints = new List<Academician_ConstraintsRequestModel>();
             string[] slotList = new string[0];
@@ -74,8 +74,8 @@ namespace Trial.Controllers
             if(description == null) { description = "Açıklamasız"; }
 
             List<int> slotListInt = new List<int>();
-            int academicianIdInt = 0;
-            int.TryParse(academicianId, out academicianIdInt);
+            /*int academicianIdInt = 0;
+            int.TryParse(academicianId, out academicianIdInt);*/
             
             for (int i = 0; i < slotList.Length; i++)
             {
@@ -85,7 +85,7 @@ namespace Trial.Controllers
             }
             for (int i = 0; i < slotList.Length; i++)
             {
-                academicianConstraints.Add(new Academician_ConstraintsRequestModel() { AcademicianId = academicianIdInt , Description = description, TimeSlotId = slotListInt.ElementAt(i)});
+                academicianConstraints.Add(new Academician_ConstraintsRequestModel() { AcademicianId = academicianId , Description = description, TimeSlotId = slotListInt.ElementAt(i)});
             }
 
             using (var client = new HttpClient())
@@ -96,18 +96,10 @@ namespace Trial.Controllers
                 //Define request data format
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 //Sending request to find web api REST service resource  using HttpClient
-                /*foreach (var item in academicianConstraints)
-                {
-                    var academicianJson = JsonConvert.SerializeObject(item);
-                    var requestContent = new StringContent(academicianJson, System.Text.Encoding.UTF8, "application/json");
-                    //Checking the response is successful or not which is sent using HttpClient
-                    var response = await client.PostAsync("api/academicianconstraint", requestContent);
-                    response.EnsureSuccessStatusCode();
-                }*/
                 var academicianJson = JsonConvert.SerializeObject(academicianConstraints);
                 var requestContent = new StringContent(academicianJson, System.Text.Encoding.UTF8, "application/json");
                 //Checking the response is successful or not which is sent using HttpClient
-                var response = await client.PostAsync("api/academician_constraint", requestContent);
+                var response = await client.PostAsync("api/academicianconstraint", requestContent);
                 response.EnsureSuccessStatusCode();
             }
             TimeSlotViewModel viewModel = new TimeSlotViewModel();    
