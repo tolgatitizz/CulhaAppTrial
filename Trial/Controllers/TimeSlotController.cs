@@ -25,17 +25,14 @@ namespace Trial.Controllers
         }
 
 
-        [HttpGet]
-        public IActionResult Select()
-        {
-
-            return RedirectToAction("Index","Academician");
-        }
-
 
         [HttpGet]
         public async Task<IActionResult> Select(Academician academician)
         {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index","Academician");
+            }
             List<TimeSlot>? timeSlots = new List<TimeSlot>();
             using (var client = new HttpClient())
             {
@@ -61,14 +58,21 @@ namespace Trial.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Select(String academicianId , String slotResult , String description)
+        public async Task<IActionResult> Select(String academicianId , String slotResult ="" , String description ="ee")
         {
             List<Academician_ConstraintsRequestModel> academicianConstraints = new List<Academician_ConstraintsRequestModel>();
             string[] slotList = new string[0];
-            if (slotResult != "")
+            if (slotResult != null)
             {
                slotList = slotResult.Split(" ");
             }
+            else
+            {
+                return RedirectToAction("Index","Academician");
+            }
+
+            if(description == null) { description = "Açıklamasız"; }
+
             List<int> slotListInt = new List<int>();
             int academicianIdInt = 0;
             int.TryParse(academicianId, out academicianIdInt);
@@ -92,10 +96,18 @@ namespace Trial.Controllers
                 //Define request data format
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 //Sending request to find web api REST service resource  using HttpClient
+                /*foreach (var item in academicianConstraints)
+                {
+                    var academicianJson = JsonConvert.SerializeObject(item);
+                    var requestContent = new StringContent(academicianJson, System.Text.Encoding.UTF8, "application/json");
+                    //Checking the response is successful or not which is sent using HttpClient
+                    var response = await client.PostAsync("api/academicianconstraint", requestContent);
+                    response.EnsureSuccessStatusCode();
+                }*/
                 var academicianJson = JsonConvert.SerializeObject(academicianConstraints);
                 var requestContent = new StringContent(academicianJson, System.Text.Encoding.UTF8, "application/json");
                 //Checking the response is successful or not which is sent using HttpClient
-                var response = await client.PostAsync("api/academician_", requestContent);
+                var response = await client.PostAsync("api/academician_constraint", requestContent);
                 response.EnsureSuccessStatusCode();
             }
             TimeSlotViewModel viewModel = new TimeSlotViewModel();    

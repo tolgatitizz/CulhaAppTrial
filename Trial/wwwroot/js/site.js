@@ -66,6 +66,7 @@ for (var i = 0; i < elements.length; i++) {
         for (var i = 0; i < checkedList.length; i++) {
             checkListString += checkedList[i] + " ";
         }
+
         slotResult.setAttribute("value", checkListString);
     });
 };
