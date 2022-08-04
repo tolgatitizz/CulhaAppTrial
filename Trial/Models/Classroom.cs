@@ -9,7 +9,7 @@
         public Boolean IsEnabled { get; set; }
         public string? Building { get; set; }
         public string? Type { get; set; }
-
+        public string? CampusID { get; set; }
     }
 }
 

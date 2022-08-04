@@ -34,13 +34,13 @@ namespace Trial.Controllers
                 if (Res.IsSuccessStatusCode)
                 {
                     //Storing the response details recieved from web api
-                    var academicianRes = Res.Content.ReadAsStringAsync().Result;
+                    var classroomRes = Res.Content.ReadAsStringAsync().Result;
                     //Deserializing the response recieved from web api and storing into the Employee list
                     classroomList = JsonConvert.DeserializeObject<List<Classroom>>(classroomRes);
                 }
             }
             ClassroomViewModel ClassroomViewModel = new ClassroomViewModel() { Classrooms = classroomList };
-            return View(classroomViewModel);
+            return View(ClassroomViewModel);
         }
 
         [HttpGet]
@@ -62,7 +62,7 @@ namespace Trial.Controllers
                 //Define request data format
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 //Sending request to find web api REST service resource  using HttpClient
-                var academicianJson = JsonConvert.SerializeObject(classroom);
+                var classroomJson = JsonConvert.SerializeObject(classroom);
                 var requestContent = new StringContent(classroomJson, Encoding.UTF8, "application/json");
                 //Checking the response is successful or not which is sent using HttpClient
                 var response = await client.PostAsync("api/classroom", requestContent);
@@ -71,15 +71,7 @@ namespace Trial.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult DeleteAcademician(Classroom classroom)
-        {
-            return View();
-        }
-        public IActionResult EditClassroom(Classroom classroom)
-        {
-            return View();
-        }
-
+        
     }
 }
 

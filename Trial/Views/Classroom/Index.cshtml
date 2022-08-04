@@ -1,0 +1,43 @@
+﻿@model Trial.ViewModels.ClassroomViewModel;
+@{
+    
+}
+
+<table id="myTable" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Sınıf Kodu</th>
+                <th>Sınıf Tipi</th>
+                <th>Bulunduğu Bina</th>
+                <th>Sınıf Kapasitesi</th>
+                <th>Sınav Kapasitesi</th>
+                <th>Bulunduğu Kampüs</th>
+                
+               
+
+            </tr>
+        </thead>
+        <tbody>
+
+
+        @{
+            if(Model.Classrooms != null){
+            for(int i = 0; i < Model.Classrooms.Count; i++)
+            {
+                <tr>
+               
+                <td>@Model.Classrooms.ElementAt(i).ClassroomCode</td>
+                <td>@Model.Classrooms.ElementAt(i).Type</td>
+                <td>@Model.Classrooms.ElementAt(i).Building</td>
+                <td>@Model.Classrooms.ElementAt(i).ClassCapacity</td>
+                <td>@Model.Classrooms.ElementAt(i).ExamCapacity</td>
+                <td>@Model.Classrooms.ElementAt(i).CampusID</td>
+               
+               
+                
+                </tr>
+            }}
+
+            }
+        </tbody>
+    </table>
