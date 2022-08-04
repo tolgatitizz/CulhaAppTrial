@@ -39,7 +39,7 @@ namespace Trial.Controllers
                     classroomList = JsonConvert.DeserializeObject<List<Classroom>>(classroomRes);
                 }
             }
-            ClassroomViewModel ClassroomViewModel = new ClassroomViewModel() { Classrooms = classroomList };
+            ClassroomViewModel classroomViewModel = new ClassroomViewModel() { Classrooms = classroomList };
             return View(classroomViewModel);
         }
 
