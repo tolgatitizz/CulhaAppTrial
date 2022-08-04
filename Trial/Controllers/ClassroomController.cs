@@ -40,7 +40,7 @@ namespace Trial.Controllers
                 }
             }
             ClassroomViewModel ClassroomViewModel = new ClassroomViewModel() { Classrooms = classroomList };
-            return View(ClassroomViewModel);
+            return View(classroomViewModel);
         }
 
         [HttpGet]

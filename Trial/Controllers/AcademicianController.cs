@@ -49,7 +49,7 @@ namespace Trial.Controllers
 
         [HttpPost]
         public async Task<IActionResult> AddAcademician(AcademicianRequestModel academician) 
-        { 
+        {
             if (!ModelState.IsValid)
             {
                 return View(academician);

@@ -30,7 +30,7 @@
                 <td>@Model.Academicians.ElementAt(i).LastName</td>
                 <td>@Model.Academicians.ElementAt(i).Email</td>
                 <td>
-                <form><label for="@Model.Academicians.ElementAt(i).FirstName" class="btn btn btn-success w-100" >Slots</label><input class="visually-hidden" id="@Model.Academicians.ElementAt(i).FirstName" type="submit"  asp-controller="TimeSlot" asp-action="Select" method="get" value="@Model.Academicians.ElementAt(i)" /></form>
+                <form><label for="@Model.Academicians.ElementAt(i).FirstName" class="btn btn btn-success w-100" >Slots</label><input class="visually-hidden" id="@Model.Academicians.ElementAt(i).FirstName" name="academicianId" type="submit"  asp-controller="TimeSlot" asp-action="Select" asp-for="Academician.Id" method="get" value="@Model.Academicians.ElementAt(i).Id" /></form>
                 </td>
                 </tr>
             }}
@@ -96,3 +96,9 @@
 
 <br>  <p class="text-center"> </p>
 <hr>
+
+
+
+  <div class="modal-dialog modal-dialog-centered">
+  ...
+</div>
