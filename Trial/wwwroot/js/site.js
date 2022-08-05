@@ -105,3 +105,9 @@ var myInput = document.getElementById('myInput')
 myModal.addEventListener('shown.bs.modal', function () {
     myInput.focus()
 })
+
+var myCarousel = document.getElementById('#myCarousel')
+var carousel = new bootstrap.Carousel(myCarousel, {
+    interval: false,
+    wrap: false
+})

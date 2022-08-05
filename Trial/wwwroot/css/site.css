@@ -17,6 +17,10 @@ body {
   margin-bottom: 60px;
 }
 
+a{
+    text-decoration:none;
+}
+
 /*Add Academician Page*/
 .divider-text {
     position: relative;

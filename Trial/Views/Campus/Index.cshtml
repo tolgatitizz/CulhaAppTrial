@@ -1,0 +1,191 @@
+﻿
+
+<div class="container">
+<div id="myCarousel" class="carousel slide carousel-dark w-75 mx-auto" data-bs-interval="false" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <a id="CampusName" href="" style="text-decoration:none;" class="carousel-item active text-black">
+      <div class="bg-light bg-gradient opacity-75 text-center p-2">
+          <i class="bi bi-house" style="font-size:4rem"></i>
+          <h4>Main Campus</h4>
+          <small>Details</small>
+      </div>
+    </a>
+    <a id="CampusName" href="" style="text-decoration:none;" class="carousel-item text-black">
+      <div class="bg-light bg-gradient opacity-75 text-center p-2">
+          <i class="bi bi-house" style="font-size:4rem"></i>
+          <h4>Second Campus</h4>
+          <small>Details</small>
+      </div>
+    </a>
+    <a id="CampusName" href="" style="text-decoration:none;" class="carousel-item text-black">
+      <div class="bg-light bg-gradient opacity-75 text-center p-2">
+          <i class="fa fa-regular fa-building p-3" style="font-size:4rem;"></i>
+          <h4>Third Campus</h4>
+          <small>Details</small>
+      </div>
+    </a>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+    <hr />
+
+    
+
+    <div class="row row-cols-5 g-4 p-4">
+        <div class="col">
+                    <a class="card text-center text-black" style="text-decoration:none;" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+          
+          <div class="card-body">
+              <img class="img-fluid opacity-75" src="https://ubys.bakircay.edu.tr/images/PortalV3/Logos/116/200x200.png" alt="FacultyImage"/>
+
+          </div>
+          <div class="card-footer">
+              <h5 class="font"> Faculty Name</h5>
+          </div>
+    </a>
+        </div>
+        <form class="col">
+        <div class="h-100">
+                <div class="card h-100 text-center">
+                <a href="" class="card-body text-black">
+                    <i class="fa-solid fa-plus pt-5" style="font-size: 4rem;"></i>
+                    <strong>Add New Faculty</strong>
+                </a>
+                <div class="card-footer">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="floatingInput" placeholder="Faculty Name">
+                      <label for="floatingInput">Faculty Name</label>
+                    </div>
+                </div>
+                </div>  
+       </div>
+       </form>
+  </div>
+
+  <br />
+
+  <div style="min-height: 120px;">
+  <div class="collapse" id="collapseExample">
+      <!-- Dartment Card Start -->
+      <div class="row bg-light bg-gradient border border-1 border-secondary rounded p-2 mb-2">
+          <div class="col-2 p-2">
+              <img src="https://raw.githubusercontent.com/antonshell/placeholder-service/master/resources/test_images/img_width=500.png" class="img-thumbnail" alt="...">
+          </div>
+          <div class="col-4 p-3">
+              <strong>Department Code</strong>
+              <p>Department Name</p>
+          </div>
+          <div class="col-5 p-3">
+              <strong>Department Chair</strong>
+              <p>Email@@posta.com</p>
+          </div>
+          <div class="col-1 p-2">
+                        <button class="btn btn-outline-danger">
+                            <i class="w-100 h-auto bi bi-person-x text-danger" style="font-size:1.5rem;"></i>
+                        </button>
+                        <button class="btn btn-outline-warning">
+                            <i class="w-100 bi bi-pen text-warning" style="font-size:1.5rem;"></i>
+                        </button>
+          </div>
+      </div>
+      <!-- Dartment Card End -->
+      <!-- Dartment Card Start -->
+      <div class="row bg-light bg-gradient border border-1 border-secondary rounded p-2 mb-2">
+          <div class="col-2 p-2">
+              <img src="https://raw.githubusercontent.com/antonshell/placeholder-service/master/resources/test_images/img_width=500.png" class="img-thumbnail" alt="...">
+          </div>
+          <div class="col-4 p-3">
+              <strong>Department Code</strong>
+              <p>Department Name</p>
+          </div>
+          <div class="col-5 p-3">
+              <strong>Department Chair</strong>
+              <p>Email@@posta.com</p>
+          </div>
+          <div class="col-1 p-2">
+                        <button class="btn btn-outline-danger">
+                            <i class="w-100 h-auto bi bi-person-x text-danger" style="font-size:1.5rem;"></i>
+                        </button>
+                        <button class="btn btn-outline-warning">
+                            <i class="w-100 bi bi-pen text-warning" style="font-size:1.5rem;"></i>
+                        </button>
+          </div>
+      </div>
+      <!-- Dartment Card End -->
+      <!--Departmen Add Card Start-->
+        <form>
+            <a href="" class="row text-black bg-light bg-gradient border border-1 border-secondary rounded p-2 mb-2 text-center" data-bs-toggle="modal" data-bs-target="#myModal">
+                <i class="fa-solid fa-plus" style="font-size: 6rem;"></i>
+                <h6>Add New Department</h6>
+            </a>
+        </form>
+       <!--Departmen Add Card End-->
+       <!--DepartmanAddModal-->
+       <div id="myModal" tabindex="-1" aria-hidden="true" class="modal fade">
+        <div class="modal-dialog modal-dialog-scrollable ">
+            <div class="modal-content">
+
+        	        <form asp-action="AddDepartment" method="post">
+              <div class="modal-body">
+        <div class="card bg-white">
+        <article class="card-body mx-auto">
+	        <h4 class="card-title mt-3 text-center">Add Department</h4>
+	        <p class="divider-text">
+                <span class="bg-white opacity-50">Form</span>
+            </p>
+
+	        <div class="form-group input-group p-1 mb-1">
+    	        <div class="input-group-prepend">
+		            <span class="input-group-text"> <i class="fa-solid fa-arrow-right-to-city p-1"></i> </span>
+		        </div>
+                <input  name="DepartmentCode" class="form-control" style="max-width: 80px;" placeholder="D.Kodu" type="text">
+    	        <input  name="Name" class="form-control" placeholder="Departman İsmi" type="text">
+            </div> <!-- form-group// -->
+            <div class="form-group input-group p-1 mb-1">
+    	        <div class="input-group-prepend">
+		            <span class="input-group-text"> <i class="fa-regular fa-envelope p-1"></i> </span>
+		         </div>
+                <input  name="Email" class="form-control" placeholder="E-Posta Adresi" type="email">
+            </div> <!-- form-group// -->
+
+
+            <div class="form-group input-group p-1 mb-1">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa-solid fa-id-badge p-1"></i> </span>
+		</div>
+	        <select  name="DeparmentChair" class="custom-select">
+		        <option selected="AcademicianName">Academician Name</option>
+		        <option value="Academician2Name">Academician2 Name</option>
+		    </select>
+    </div> <!-- form-group// -->
+
+            <!-- Button Group-->
+            <!--Button Group End-->
+
+        <!-- form-group// -->      
+                                                             
+
+        </article>
+        </div> <!-- card.// -->
+                    </div>
+                          <div class="modal-footer">
+                <button type="button" class="p-1 w-25 btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="p-1 w-50 btn btn-primary"> Kaydet</button>
+              </div>
+              </form>
+              </div>
+            </div>
+        </div>
+       <!--DepartmanAddModalEnd-->
+
+  </div>
+</div>
+
+</div>
