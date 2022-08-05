@@ -1,6 +1,73 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "New Page Demo";
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+	<button id="myInput" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+  Launch demo modal
+</button>
+<div id="myModal" tabindex="-1" aria-hidden="true" class="modal fade">
+<div class="modal-dialog modal-dialog-scrollable ">
+    <div class="modal-content">
+        	<form asp-action="AddAcademician" method="post">
+      <div class="modal-body">
+<div class="card bg-white">
+<article class="card-body mx-auto">
+	<h4 class="card-title mt-3 text-center">Add Academician</h4>
+	<p class="divider-text">
+        <span class="bg-white opacity-50">Bilgiler</span>
+    </p>
+
+	<div class="form-group input-group p-1">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa-regular fa-a p-1"></i> </span>
+		</div>
+		<select  name="Title" class="custom-select" style="max-width: 120px;">
+		    <option selected="Ar. Grv.">Ar. Grv.</option>
+		    <option value="Dr.">Dr.</option>
+		    <option value="Doç. Dr.">Doç. Dr.</option>
+		    <option value="Prof. Dr.">Prof. Dr.</option>
+		</select>
+    	<input  name="FirstName" class="form-control" placeholder="İsim" type="text">
+        <input  name="LastName" class="form-control" placeholder="Soyisim" type="text">
+    </div> <!-- form-group// -->
+    <div class="form-group input-group p-1">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa-regular fa-envelope p-1"></i> </span>
+		 </div>
+        <input  name="Email" class="form-control" placeholder="E-Posta Adresi" type="email">
+    </div> <!-- form-group// -->
+	<div class="form-group input-group p-1">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-address-card p-1"></i> </span>
+		 </div>
+        <input  name="IdentityNo" class="form-control" placeholder="Kimlik No" type="text">
+    </div>
+    <!-- Button Group-->
+    <label  class="px-1" >Asistan mı?</label>
+    <div class="w-100 btn-group p-1" role="group" aria-label="Basic radio toggle button group">
+  <input  type="radio" class="btn-check" name="btnradio" value="true" id="btnradio1" autocomplete="off" checked>
+  <label class="btn btn-outline-primary" for="btnradio1" >Asistan</label>
+
+  <input  type="radio" class="btn-check" name="btnradio" value="false" id="btnradio2" autocomplete="off">
+  <label class="btn btn-outline-primary" for="btnradio2">Asistan Değil</label>
+</div>      
+    <!--Button Group End-->
+
+<!-- form-group// -->      
+                                                             
+
+</article>
+</div> <!-- card.// -->
+            </div>
+                  <div class="modal-footer">
+        <button type="button" class="p-1 w-25 btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="p-1 w-50 btn btn-primary"> Kaydet</button>
+      </div>
+      </form>
+      </div>
+    </div>
+</div>
+
+
+
