@@ -128,3 +128,7 @@ function ectsFunction(val) {
     document.getElementById('ectsLabel').innerHTML = 'ECTS: ' + val;
 
 }
+function semesterFunction(val) {
+    document.getElementById('semesterLabel').innerHTML = 'Semester: ' + val + ". Semester";
+
+}

@@ -7,51 +7,30 @@
 <div class="container"> 
     <h1>Course Offer</h1>
     <div class="card">
-        <div class="card-body">
-            <!--TimeSlotStart-->
-                        <table class="table table-striped">
-                    <thead class="table-dark">
-                  <tr>
-                  <th scope="col">#</th>
-                                        @for(int i=0; i < Model.columnCount ; i++)
-                                        {
-                                            <th>
-                                                @(i+1) <span>. Column</span> 
-                                            </th>
-                                        }
-                                    </tr>
-              </thead>
-              <tbody>
-                                    @for(int i=0 ;i< Model.rowCount;i++)
-                                    {
-                                        <tr>
-                                            <th>
-                                                    @Model.TimeSlots.ElementAt(i*Model.columnCount).Description
-                                            </th>
-                                            @for (var j = 0; j < Model.columnCount; j++)
-                                            {
-                                                <td>
-                                                    <label class="btn btn-success availableBox" id="@Model.TimeSlots.ElementAt((Model.columnCount*i)+j).Id" for="@Model.TimeSlots.ElementAt((Model.columnCount*i)+j).Id">Slot</label>
-                                                </td>
-                                            }
-                                        </tr>
-                                    }
-                        
-              </tbody>
-            </table>
-                <div class="button-group">
-                    <button id="allAvailable"  type="button" class="btn btn-success btn-sm">Tümünü Müsait Seç</button>
-                    <button id="allBusy" type="button" class="btn btn-danger btn-sm">Tümünü Meşgul Seç</button>
-                </div>
-                <br/>
-    
-                <label for="exampleFormControlTextarea1" class="form-label">Tanımlama</label>
-              <textarea class="form-control" name="description" id="description" rows="3"></textarea>
-                <input type="hidden" name="slotResult" value="" id="slotResult">
-                <input type="hidden" name="academicianId" value="@Model.AcademicianId" id="academicianId">
-                    <br/>
-                <button class="btn btn-secondary" type="submit">Submit</button>
-                <!--TimeSlotEnd-->
+        <div class="card-body text-center">
+            <h4>Term</h4>
+            <input id="Term" class="form-control text-center" name="Term" type="text" />
+            <h4>Course Code - Course Name</h4>
+            <input type="text" readonly class="form-control-plaintext text-center" id="staticCourse" value="Course Code | Course Name">
+            <h4>Choose a Academician</h4>
+            <select class="form-select text-center" aria-label="Default select example">
+              <option selected>AcademicianName AcademicianSurname</option>
+              <option value="AcademicianId">AcademicianName AcademicianSurname</option>
+              <option value="AcademicianId">AcademicianName AcademicianSurname</option>
+              <option value="AcademicianId">AcademicianName AcademicianSurname</option>
+            </select>
+            <h4>Choose a Department</h4>
+            <select class="form-select text-center" aria-label="Default select example">
+              <option selected>Department Name</option>
+              <option value="DepartmentId">Department Name</option>
+              <option value="DepartmentId">Department Name</option>
+              <option value="DepartmentId">Department Name</option>
+            </select>
+            <h4>Semester Count</h4>
+            <!-- form-group// -->
+            <label id="semesterLabel" for="Semester" class="px-1 mb-1">Semester Count</label>
+            <input id="Semester" name="SemesterCount" class="form-control px-2" placeholder="Semester" min="0" max="16" step="1" value="1" oninput="    semesterFunction(this.value);" type="range">
+            <!-- Button Group-->
         </div>
     </div>
 </div>
