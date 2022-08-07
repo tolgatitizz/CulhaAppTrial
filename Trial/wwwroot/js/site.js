@@ -104,10 +104,27 @@ var myInput = document.getElementById('myInput')
 
 myModal.addEventListener('shown.bs.modal', function () {
     myInput.focus()
-})
+});
 
 var myCarousel = document.getElementById('#myCarousel')
 var carousel = new bootstrap.Carousel(myCarousel, {
     interval: false,
     wrap: false
-})
+});
+
+function theoreticalFunction(val) {
+    document.getElementById('theoreticalHourLabel').innerHTML = 'Teorik Saat: ' + val;
+
+}
+function praticalFunction(val) {
+    document.getElementById('praticalHourLabel').innerHTML = 'Pratik Saat: ' + val;
+
+}
+function creditFunction(val) {
+    document.getElementById('creditLabel').innerHTML = 'Ders Kredisi: ' + val;
+
+}
+function ectsFunction(val) {
+    document.getElementById('ectsLabel').innerHTML = 'ECTS: ' + val;
+
+}

@@ -1,0 +1,57 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="container"> 
+    <h1>Course Offer</h1>
+    <div class="card">
+        <div class="card-body">
+            <!--TimeSlotStart-->
+                        <table class="table table-striped">
+                    <thead class="table-dark">
+                  <tr>
+                  <th scope="col">#</th>
+                                        @for(int i=0; i < Model.columnCount ; i++)
+                                        {
+                                            <th>
+                                                @(i+1) <span>. Column</span> 
+                                            </th>
+                                        }
+                                    </tr>
+              </thead>
+              <tbody>
+                                    @for(int i=0 ;i< Model.rowCount;i++)
+                                    {
+                                        <tr>
+                                            <th>
+                                                    @Model.TimeSlots.ElementAt(i*Model.columnCount).Description
+                                            </th>
+                                            @for (var j = 0; j < Model.columnCount; j++)
+                                            {
+                                                <td>
+                                                    <label class="btn btn-success availableBox" id="@Model.TimeSlots.ElementAt((Model.columnCount*i)+j).Id" for="@Model.TimeSlots.ElementAt((Model.columnCount*i)+j).Id">Slot</label>
+                                                </td>
+                                            }
+                                        </tr>
+                                    }
+                        
+              </tbody>
+            </table>
+                <div class="button-group">
+                    <button id="allAvailable"  type="button" class="btn btn-success btn-sm">Tümünü Müsait Seç</button>
+                    <button id="allBusy" type="button" class="btn btn-danger btn-sm">Tümünü Meşgul Seç</button>
+                </div>
+                <br/>
+    
+                <label for="exampleFormControlTextarea1" class="form-label">Tanımlama</label>
+              <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+                <input type="hidden" name="slotResult" value="" id="slotResult">
+                <input type="hidden" name="academicianId" value="@Model.AcademicianId" id="academicianId">
+                    <br/>
+                <button class="btn btn-secondary" type="submit">Submit</button>
+                <!--TimeSlotEnd-->
+        </div>
+    </div>
+</div>

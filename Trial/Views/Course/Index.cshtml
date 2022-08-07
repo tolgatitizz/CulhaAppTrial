@@ -3,46 +3,122 @@
     
 }
 
-<table id="myTable" class="table table-striped table-bordered" style="width:100%">
-        <thead>
-            <tr>
-                <th>Ders Kodu</th>
-                <th>Ders Adı</th>
-                <th>Ders Kotası</th>
-                <th>Ders Tipi</th>
-                <th>Pratik Ders Saati</th>
-                <th>Teorik Ders Saati</th>
-                <th>Kredi</th>
-                <th>AKTS</th>
-                
-               
+<div class="container">
+    <h1>Courses List</h1>
+    <div class="text-end p-2">
+        <button class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#myModal" >Create a Course</button>
+    </div>
 
-            </tr>
-        </thead>
-        <tbody>
+    <!--CourseAddModal-->
+       <div id="myModal" tabindex="-1" aria-hidden="true" class="modal fade">
+        <div class="modal-dialog modal-dialog-scrollable ">
+            <div class="modal-content">
 
+        	        <form asp-action="AddCourse" method="post">
+              <div class="modal-body">
+        <div class="card bg-white">
+        <article class="card-body mx-auto">
+	        <h4 class="card-title mt-3 text-center">Add Course</h4>
+	        <p class="divider-text">
+                <span class="bg-white opacity-50">Form</span>
+            </p>
 
-        @{
-            if(Model.Courses != null){
-            for(int i = 0; i < Model.Courses.Count; i++)
-            {
-                <tr>
-               
-                <td>@Model.Courses.ElementAt(i).CourseCode</td>
-                <td>@Model.Courses.ElementAt(i).CourseName</td>
-                <td>@Model.Courses.ElementAt(i).Quota</td>
-                <td>@Model.Courses.ElementAt(i).CourseType</td>
-                <td>@Model.Courses.ElementAt(i).PracticalHour</td>
-                <td>@Model.Courses.ElementAt(i).TheoreticalHour</td>
-                <td>@Model.Courses.ElementAt(i).Credit</td>
-                <td>@Model.Courses.ElementAt(i).ECTS</td>
-               
-               
-                
-                </tr>
-            }}
+	        <div class="form-group input-group p-1 mb-1">
+    	        <div class="input-group-prepend">
+		            <span class="input-group-text"><i class="fa-regular fa-note-sticky p-1"></i> </span>
+		        </div>
+                <input  name="CourseCode" class="form-control" style="max-width: 80px;" placeholder="Kod" type="text">
+    	        <input  name="CourseName" class="form-control" placeholder="Kurs İsmi" type="text">
+            </div> <!-- form-group// -->
+            <div class="form-group input-group p-1 mb-1">
+    	        <div class="input-group-prepend">
+		            <span class="input-group-text"> <i class="fa-solid fa-arrow-up-9-1 p-1"></i> </span>
+		         </div>
+                <input  name="Quota" class="form-control" placeholder="Kota" min="0" value="30" type="number">
+            </div> 
+            <!-- form-group// -->
+            <label id="theoreticalHourLabel" for="theoreticalHour" class="px-1 mb-1 form-label">Theoretical Hour</label>
+            <input  id="theoreticalHour" name="TheoreticalHour" class="form-control px-2" placeholder="Theoretical Hour" min="0" max="16" step="1" value="0" oninput="    theoreticalFunction(this.value);" type="range">
+            <!-- Button Group-->
+            <!-- form-group// -->
+            <label id="praticalHourLabel" for="praticalHour" class="px-1 mb-1">Pratical Hour</label>
+            <input id="praticalHour" name="PraticalHour" class="form-control px-2" placeholder="Pratical Hour" min="0" max="16" step="1" value="0" oninput="    praticalFunction(this.value);" type="range">
+            <!--Button Group End-->
+            <!-- Button Group-->
+            <label  class="px-1" >Course Type</label>
+            <div class="w-100 btn-group p-1" role="group" aria-label="Basic radio toggle button group">
+                <input  type="radio" class="btn-check" name="btnradio" value="true" id="btnradio1" autocomplete="off" checked>
+                <label class="btn btn-outline-primary" for="btnradio1" >Type A</label>
+                <input  type="radio" class="btn-check" name="btnradio" value="false" id="btnradio2" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btnradio2">Type B</label>
+            </div>      
+    <!--Button Group End-->
+                        <!-- form-group// -->
+            <label id="creditLabel" for="Credit" class="px-1 mb-1">Course Credit</label>
+            <input id="Credit" name="Credit" class="form-control px-2" placeholder="Theoretical Hour" min="0" max="30" step="0.5" value="6" oninput="    creditFunction(this.value);" type="range">
+            <!-- Button Group-->
+            <!-- form-group// -->
+            <label id="ectsLabel" for="ECTS" class="px-1 mb-1">Course ECTS</label>
+            <input id="ECTS" name="ECTS" class="form-control px-2" placeholder="Pratical Hour" min="0" max="30" step="0.5" value="6" oninput="    ectsFunction(this.value);" type="range">
+            <!--Button Group End-->
+            <!-- Button Group-->
 
-            }
-        </tbody>
-    </table>
+        <!-- form-group// -->      
+                                                             
 
+        </article>
+        </div> <!-- card.// -->
+                    </div>
+                          <div class="modal-footer">
+                <button type="button" class="p-1 w-25 btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="p-1 w-50 btn btn-primary"> Kaydet</button>
+              </div>
+              </form>
+              </div>
+            </div>
+        </div>
+       <!--CourseAddModalEnd-->
+
+    <div class="card">
+        <div class="card-body row-cols-5 g-3">
+            <div class="card col d-inline-block">
+                <div class="card-header bg-info text-white d-flex align-items-center justify-content-between">
+                    <h4 >Course Name</h4>
+                    <a href=""><i class="fa-solid fa-gear just fs-3 border p-1 border-2 rounded-3"></i></a>
+                </div>
+                    <img src="https://ubys.bakircay.edu.tr/images/PortalV3/Logos/116/200x200.png" class="card-img-top mb-2" style="max-height:7.5rem;" alt="...">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item list-group-item-secondary opacity-75">CourseCode: <span class="text-black">Text</span></li>
+                        <li class="list-group-item list-group-item-secondary opacity-75">Course Type: <span class="text-black">Text</span></li>
+                        <li class="list-group-item list-group-item-secondary opacity-75">Theoratical Hour: <span class="text-black">Text</span></li>
+                        <li class="list-group-item list-group-item-secondary opacity-75">Pratical Hour: <span class="text-black">Text</span></li>
+                        <li class="list-group-item list-group-item-secondary text-center">Credit: <span class="vr"></span> ECTS: </li>
+                    </ul>
+                <div class="card-footer text-center">
+                    <button class="btn btn-info w-100 text-white">
+                        Offer This Course
+                    </button>
+                </div>
+            </div>
+            <div class="card col d-inline-block">
+                <div class="card-header bg-info text-white d-flex align-items-center justify-content-between">
+                    <h4 >Course Name</h4>
+                    <a href=""><i class="fa-solid fa-gear just fs-3 border p-1 border-2 rounded-3"></i></a>
+                </div>
+                    <img src="https://ubys.bakircay.edu.tr/images/PortalV3/Logos/116/200x200.png" class="card-img-top mb-2" style="max-height:7.5rem;" alt="...">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item list-group-item-secondary opacity-75">CourseCode: <span class="text-black">Text</span></li>
+                        <li class="list-group-item list-group-item-secondary opacity-75">Course Type: <span class="text-black">Text</span></li>
+                        <li class="list-group-item list-group-item-secondary opacity-75">Theoratical Hour: <span class="text-black">Text</span></li>
+                        <li class="list-group-item list-group-item-secondary opacity-75">Pratical Hour: <span class="text-black">Text</span></li>
+                        <li class="list-group-item list-group-item-secondary text-center">Credit: <span class="vr"></span> ECTS: </li>
+                    </ul>
+                <div class="card-footer text-center">
+                    <button class="btn btn-info w-100 text-white">
+                        Offer This Course
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
