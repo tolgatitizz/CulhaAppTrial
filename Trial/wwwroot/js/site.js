@@ -319,3 +319,10 @@ function removeClass(el, className) {
         el.className = el.className.replace(reg, ' ');
     }
 }
+
+function departmentScheduleFunction(val) {
+    console.log(val);
+}
+function lectureConflictFunction(val) {
+    console.log(val);
+}

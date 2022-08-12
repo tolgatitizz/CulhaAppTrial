@@ -3,6 +3,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+
 }
 
 <h3 class="mb-2">@Model.DepartmentName Bölümü Ders Programı</h3>
@@ -53,15 +54,26 @@
                                         <td class="pb-2 align-bottom">
                         @{
                             int slotId = Model.TimeSlots.ElementAt((j * Model.rowCount) + i).Id;
+                            List<int> semesterList = new List<int>();
                         }
 
                         <div id="" class="d-block text-center departmentScheduleCell" > 
                             @for(int k =0; k < Model.DepartmentClassScheduleList.Count(); k++)
                             {
+                                
                                 if(Model.DepartmentClassScheduleList.ElementAt(k).timeSlotId == slotId)
                                 {
-                                    <strong class="" style="font-size:1rem;">@Model.DepartmentClassScheduleList.ElementAt(k).courseName</strong> <em style="font-size:small">@Model.DepartmentClassScheduleList.ElementAt(k).classroomCode</em> <br> <hr class="opacity-25"/>
+                                    
+                                    <div class="vr"></div>  <strong class="" style="font-size:1rem;">@Model.DepartmentClassScheduleList.ElementAt(k).courseCode</strong> <em style="font-size:small">@Model.DepartmentClassScheduleList.ElementAt(k).classroomCode</em> <small>@Model.DepartmentClassScheduleList.ElementAt(k).semesterCount</small> <br> <hr class="opacity-25"/>
+                                    if (semesterList.Contains(Model.DepartmentClassScheduleList.ElementAt(k).semesterCount))
+                                    {
+                                        <input type="hidden" onload="lectureConflictFunction(this.value);" value="@Model.DepartmentClassScheduleList.ElementAt(k).courseName"/>
+                                    }
+                                    semesterList.Add(Model.DepartmentClassScheduleList.ElementAt(k).semesterCount);
+                                    
                                 }
+
+
                             }
                             
                             </div>

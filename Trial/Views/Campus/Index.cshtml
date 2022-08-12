@@ -81,8 +81,8 @@
               <strong>@Model.DepartmentList.ElementAt(i).DepartmentCode - @Model.DepartmentList.ElementAt(i).Name</strong>
               <p class="faculty-card-fname">Fakülte Kodu: </p>
               <form>
-                  <label for="departmentSchedule" class="btn btn-dark h-25">Department Schedule</label>
-                  <input id="departmentSchedule" name="DepartmentCode" type="submit"  asp-controller="Campus" asp-action="DepartmentSchedule" asp-for="@Model.DepartmentList.ElementAt(i).DepartmentCode" method="get" value="@Model.DepartmentList.ElementAt(i).DepartmentCode" class="visually-hidden"/>
+                  <label for="@Model.DepartmentList.ElementAt(i).Name" class="btn btn-dark h-25">Department Schedule</label>
+                  <input id="@Model.DepartmentList.ElementAt(i).Name" onclick="departmentScheduleFunction(this.value);" name="DepartmentCode" type="submit"  asp-controller="Campus" asp-action="DepartmentSchedule" asp-for="@Model.DepartmentList.ElementAt(i).DepartmentCode" method="get" value="@Model.DepartmentList.ElementAt(i).DepartmentCode" class="visually-hidden"/>
                   <input id="departmentScheduleName" type="hidden" name="Name" value="@Model.DepartmentList.ElementAt(i).Name">
               </form>
           </div>

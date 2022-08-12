@@ -16,6 +16,40 @@
     
 </head>
 <body>
+
+
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"><image src="https://i.pinimg.com/originals/6c/89/66/6c89661628a901db2b078a6af2561a92.png"></image></svg>
+        <span class="fs-4">Simple header</span>
+      </a>
+
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Academician" asp-action="Index">Academicians</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Classroom" asp-action="Index">Classrooms</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="ClassSchedule" asp-action="Index">ClassSchedule</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Campus" asp-action="Index">Campus</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Course" asp-action="Index">Course</a>
+                        </li>
+      </ul>
+    </header>
+
+
+  <div class="b-example-divider"></div>
+
+    <!--
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" >
             <div class="container-fluid">
@@ -50,6 +84,7 @@
             </div>
         </nav>
     </header>
+    -->
     <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
