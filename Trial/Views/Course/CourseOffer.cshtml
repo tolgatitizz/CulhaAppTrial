@@ -11,7 +11,7 @@
             <h4>Term</h4>
             <input id="Term" class="form-control text-center" name="Term" type="text" />
             <h4>Course Code - Course Name</h4>
-            <input type="text" readonly class="form-control-plaintext text-center" id="staticCourse" value="Course Code | Course Name">
+            <input type="text" readonly class="form-control-plaintext text-center" id="staticCourse" placeholder="Course Name" value="Course Code | Course Name">
             <h4>Choose a Academician</h4>
             <select class="form-select text-center" aria-label="Default select example">
               <option selected>AcademicianName AcademicianSurname</option>
@@ -31,6 +31,26 @@
             <label id="semesterLabel" for="Semester" class="px-1 mb-1">Semester Count</label>
             <input id="Semester" name="SemesterCount" class="form-control px-2" placeholder="Semester" min="0" max="16" step="1" value="1" oninput="    semesterFunction(this.value);" type="range">
             <!-- Button Group-->
+            <!-- form-group// -->
+            <label id="studentCountLabel" for="studentCount" class="px-1 mb-1">Student Count</label>
+            <input id="studentCount" name="studentCount" class="form-control px-2" placeholder="Semester" min="0" max="100" step="1" value="1" oninput="    studentCountFunction(this.value);" type="range">
+            <!-- Button Group-->
+                <!-- Button Group-->
+            <label  class="px-1" >Ders Tipi:</label>
+            <div class="w-100 btn-group p-1" role="group" aria-label="Basic radio toggle button group">
+            <input  type="radio" class="btn-check" name="btnradio" value="true" id="btnradio1" autocomplete="off" checked>
+            <label class="btn btn-outline-success" for="btnradio1" >Yüz Yüze</label>
+              <input  type="radio" class="btn-check" name="btnradio" value="false" id="btnradio2" autocomplete="off">
+              <label class="btn btn-outline-warning" for="btnradio2">Uzaktan</label>
+            </div>      
+                <!--Button Group End-->
+                <!-- Checkbox -->
+            <input  type="hidden" class="" name="CoYear" value="@DateTime.Now.Year" id="CoYear" autocomplete="off">
+            <input  type="hidden" class="" name="Section" value="SectionNumber" id="Section" autocomplete="off" />
+            <input  type="hidden" class="" name="IsAssigned" value="true" id="IsAssigned" autocomplete="off" />
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="p-1 w-25 btn btn-primary"> Kaydet</button>
         </div>
     </div>
 </div>
