@@ -21,6 +21,11 @@ namespace Trial.Controllers
                 return View(academician);
             }
             List<Academician>? academicianList = new List<Academician>();
+            List<CourseOffered>? courseOffereds = new List<CourseOffered>();
+            List<Academician_Constraint>? constraintList = new List<Academician_Constraint>(); 
+            List<TimeSlot> slotList = new List<TimeSlot>();
+            List<EducationArea>? educationAreas = new List<EducationArea>();
+            List<AcademicianClassSchedule>? academicianClassSchedules = new List<AcademicianClassSchedule>();
             using (var client = new HttpClient())
             {
                 //Passing service base url
@@ -38,8 +43,73 @@ namespace Trial.Controllers
                     //Deserializing the response recieved from web api and storing into the Employee list
                     academicianList = JsonConvert.DeserializeObject<List<Academician>>(academicianRes);
                 }
+
+                /*client.DefaultRequestHeaders.Clear();
+                //Sending request to find web api REST service resource GetAllEmployees using HttpClient
+                HttpResponseMessage ResCourse = await client.GetAsync("api/courseoffered");
+                //Checking the response is successful or not which is sent using HttpClient
+                if (ResCourse.IsSuccessStatusCode)
+                {
+                    //Storing the response details recieved from web api
+                    var courseRes = ResCourse.Content.ReadAsStringAsync().Result;
+                    //Deserializing the response recieved from web api and storing into the Employee list
+                    courseOffereds = JsonConvert.DeserializeObject<List<CourseOffered>>(courseRes);
+                }*/
+                client.DefaultRequestHeaders.Clear();
+                //Sending request to find web api REST service resource GetAllEmployees using HttpClient
+                HttpResponseMessage ResAcCons = await client.GetAsync("api/academicianconstraint");
+                //Checking the response is successful or not which is sent using HttpClient
+                if (ResAcCons.IsSuccessStatusCode)
+                {
+                    //Storing the response details recieved from web api
+                    var acConsRes = ResAcCons.Content.ReadAsStringAsync().Result;
+                    //Deserializing the response recieved from web api and storing into the Employee list
+                    constraintList = JsonConvert.DeserializeObject<List<Academician_Constraint>>(acConsRes);
+                }
+                client.DefaultRequestHeaders.Clear();
+                //Sending request to find web api REST service resource GetAllEmployees using HttpClient
+                HttpResponseMessage ResTimeSlot = await client.GetAsync("api/timeslot");
+                //Checking the response is successful or not which is sent using HttpClient
+                if (ResTimeSlot.IsSuccessStatusCode)
+                {
+                    //Storing the response details recieved Sfrom web api
+                    var timeSlotRes = ResTimeSlot.Content.ReadAsStringAsync().Result;
+                    //Deserializing the response recieved from web api and storing into the Employee list
+                    slotList = JsonConvert.DeserializeObject<List<TimeSlot>>(timeSlotRes);
+                }
+                client.DefaultRequestHeaders.Clear();
+                /*//Sending request to find web api REST service resource GetAllEmployees using HttpClient
+                HttpResponseMessage ResAcClassSchedules = await client.GetAsync("api/EducationArea");
+                //Checking the response is successful or not which is sent using HttpClient
+                if (ResAcClassSchedules.IsSuccessStatusCode)
+                {
+                    //Storing the response details recieved from web api
+                    var acClassSchedulesRes = ResAcClassSchedules.Content.ReadAsStringAsync().Result;
+                    //Deserializing the response recieved from web api and storing into the Employee list
+                    educationAreas = JsonConvert.DeserializeObject<List<EducationArea>>(acClassSchedulesRes);
+                }*/
+                client.DefaultRequestHeaders.Clear();
+                //Sending request to find web api REST service resource GetAllEmployees using HttpClient
+                HttpResponseMessage ResAcSch = await client.GetAsync("api/academician/allacademicianclassschedule");
+                //Checking the response is successful or not which is sent using HttpClient
+                if (ResAcSch.IsSuccessStatusCode)
+                {
+                    //Storing the response details recieved from web api
+                    var acSchRes = ResAcSch.Content.ReadAsStringAsync().Result;
+                    //Deserializing the response recieved from web api and storing into the Employee list
+                    academicianClassSchedules = JsonConvert.DeserializeObject<List<AcademicianClassSchedule>>(acSchRes);
+                }
             }
-            AcademicianViewModel academicianViewModel = new AcademicianViewModel() { Academicians = academicianList };
+            AcademicianViewModel academicianViewModel = new AcademicianViewModel() {
+                Academicians = academicianList,
+                CourseOffereds = courseOffereds,
+                Academician_Constraints = constraintList,
+                columnCount = 5,
+                rowCount = 10,
+                TimeSlots = slotList,
+                EducatianAreaList = educationAreas,
+                AcademicianClassScheduleList = academicianClassSchedules
+            };
             return View(academicianViewModel);
         }
 

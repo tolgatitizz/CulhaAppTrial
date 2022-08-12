@@ -1,8 +1,31 @@
-﻿@model Trial.ViewModels.AcademicianViewModel;
+﻿@using Newtonsoft.Json
+@model Trial.ViewModels.AcademicianViewModel;
 @{
-    
-}
+    String constraints = "";
+    if (Model.Academician_Constraints != null)
+    {
+        for (var i = 0; i < Model.Academician_Constraints.Count; i++)
+        {
+            constraints = constraints + "-" + Model.Academician_Constraints.ElementAt(i).AcademicianId.ToString() + "_" + Model.Academician_Constraints.ElementAt(i).TimeSlotId.ToString();
+        }
+    }
+    String academicianSchedule = "";
+    if (Model.AcademicianClassScheduleList != null)
+    {
+        for (var i = 0; i < Model.AcademicianClassScheduleList.Count; i++)
+        {
+            academicianSchedule = academicianSchedule + "," + Model.AcademicianClassScheduleList.ElementAt(i).AcademicianId.ToString() + "_" + Model.AcademicianClassScheduleList.ElementAt(i).ClassroomCode + "_" + Model.AcademicianClassScheduleList.ElementAt(i).CourseCode + "_" + Model.AcademicianClassScheduleList.ElementAt(i).CourseName + "_" + Model.AcademicianClassScheduleList.ElementAt(i).TimeSlotId.ToString();
+        }
+    }
 
+}
+<div class="container">
+	<button id="myInput" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+  Add Academician
+</button>
+
+<input id="constraints" type="hidden" value="@constraints" />
+<input id="academicianSchedule" type="hidden" value="@academicianSchedule" />
 <table id="myTable" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
@@ -19,11 +42,16 @@
 
         @{
             if(Model.Academicians != null){
-            for(int i = 0; i < Model.Academicians.Count; i++)
-            {
-                <tr>
-                <th>
-                <form><label for="@Model.Academicians.ElementAt(i).Id" class="btn btn-warning" >Profil</label><input class="visually-hidden" id="@Model.Academicians.ElementAt(i).Id" type="submit"  asp-controller="profile" asp-action="Index" method="get" value="@Model.Academicians.ElementAt(i).Id.ToString()" /></form>
+                for(int i = 0; i < Model.Academicians.Count; i++)
+                {
+                    <tr>
+                        <th>
+                            @{
+                                String str = Model.Academicians.ElementAt(i).Id.ToString()  + "-" + Model.Academicians.ElementAt(i).FirstName + "-" + Model.Academicians.ElementAt(i).LastName + "-" + Model.Academicians.ElementAt(i).Email + "-" + Model.Academicians.ElementAt(i).IsAssistant.ToString() + "-"+ Model.Academicians.ElementAt(i).Title;
+                                
+                                
+                                <label id="inputModal" for="@Model.Academicians.ElementAt(i).Id" class="btn btn-warning"  >Profil</label><input type="button" class="visually-hidden" id="@Model.Academicians.ElementAt(i).Id" value="@str" onclick="inputModalFunction(value)" data-bs-toggle="modal" data-bs-target="#pageModal" />
+                }
                 </th>
                 <td>@Model.Academicians.ElementAt(i).Title</td>
                 <td>@Model.Academicians.ElementAt(i).FirstName</td>
@@ -38,67 +66,277 @@
             }
         </tbody>
     </table>
+    <input id="selectedProfile" name="selectedProfile" type="hidden" value=""/>
+    <!--Academician ADD Modal Start-->
 
-    <div class="container">
-<br>  <p class="text-center"> </p>
-<hr>
-<div class="card bg-light">
-<article class="card-body mx-auto" style="max-width: 400px;">
-	<h4 class="card-title mt-3 text-center">Add Academician</h4>
-	<p class="divider-text">
-        <span class="bg-light">Bilgiler</span>
-    </p>
-	<form asp-action="AddAcademician" method="post">
-	<div class="form-group input-group p-1">
-    	<div class="input-group-prepend">
-		    <span class="input-group-text"> <i class="fa-regular fa-a p-1"></i> </span>
-		</div>
-		<select asp-for="Academician.Title" name="Title" class="custom-select" style="max-width: 120px;">
-		    <option selected="Ar. Grv.">Ar. Grv.</option>
-		    <option value="Dr.">Dr.</option>
-		    <option value="Doç. Dr.">Doç. Dr.</option>
-		    <option value="Prof. Dr.">Prof. Dr.</option>
-		</select>
-    	<input asp-for="AcademicianRequestModel.FirstName" name="FirstName" class="form-control" placeholder="İsim" type="text">
-        <input asp-for="AcademicianRequestModel.LastName" name="LastName" class="form-control" placeholder="Soyisim" type="text">
-    </div> <!-- form-group// -->
-    <div class="form-group input-group p-1">
-    	<div class="input-group-prepend">
-		    <span class="input-group-text"> <i class="fa-regular fa-envelope p-1"></i> </span>
-		 </div>
-        <input asp-for="AcademicianRequestModel.Email" name="Email" class="form-control" placeholder="E-Posta Adresi" type="email">
-    </div> <!-- form-group// -->
-	<div class="form-group input-group p-1">
-    	<div class="input-group-prepend">
-		    <span class="input-group-text"> <i class="fa fa-address-card p-1"></i> </span>
-		 </div>
-        <input asp-for="AcademicianRequestModel.IdentityNo" name="IdentityNo" class="form-control" placeholder="Kimlik No" type="text">
-    </div>
-    <!-- Button Group-->
-    <label asp-for="AcademicianRequestModel.IsAssistant" class="px-1" >Asistan mı?</label>
-    <div class="w-100 btn-group p-1" role="group" aria-label="Basic radio toggle button group">
-  <input  type="radio" class="btn-check" name="btnradio" value="true" id="btnradio1" autocomplete="off" checked>
-  <label asp-for="AcademicianRequestModel.IsAssistant" class="btn btn-outline-primary" for="btnradio1" >Asistan</label>
+    <div id="myModal" tabindex="-1" aria-hidden="true" class="modal fade">
+        <div class="modal-dialog modal-dialog-scrollable ">
+            <div class="modal-content">
+        	        <form asp-action="AddAcademician" method="post">
+              <div class="modal-body">
+        <div class="card bg-white">
+        <article class="card-body mx-auto">
+	        <h4 class="card-title mt-3 text-center">Add Academician</h4>
+	        <p class="divider-text">
+                <span class="bg-white opacity-50">Form</span>
+            </p>
 
-  <input asp-for="AcademicianRequestModel.IsAssistant" type="radio" class="btn-check" name="btnradio" value="false" id="btnradio2" autocomplete="off">
-  <label class="btn btn-outline-primary" for="btnradio2">Asistan Değil</label>
-</div>      
-    <!--Button Group End-->
-        <button type="submit" class="p-1 w-100 btn btn-primary btn-block"> Kaydet  </button>
-<!-- form-group// -->      
+	        <div class="form-group input-group p-1">
+    	        <div class="input-group-prepend">
+		            <span class="input-group-text"> <i class="fa-regular fa-a p-1"></i> </span>
+		        </div>
+		        <select asp-for="Academician.Title" name="Title" class="custom-select" style="max-width: 120px;">
+		            <option selected="Ar. Grv.">Ar. Grv.</option>
+		            <option value="Dr.">Dr.</option>
+		            <option value="Doç. Dr.">Doç. Dr.</option>
+		            <option value="Prof. Dr.">Prof. Dr.</option>
+		        </select>
+    	        <input  asp-for="AcademicianRequestModel.FirstName" name="FirstName" class="form-control" placeholder="İsim" type="text">
+                <input  asp-for="AcademicianRequestModel.LastName" name="LastName" class="form-control" placeholder="Soyisim" type="text">
+            </div> <!-- form-group// -->
+            <div class="form-group input-group p-1">
+    	        <div class="input-group-prepend">
+		            <span class="input-group-text"> <i class="fa-regular fa-envelope p-1"></i> </span>
+		         </div>
+                <input  asp-for="AcademicianRequestModel.Email" name="Email" class="form-control" placeholder="E-Posta Adresi" type="email">
+            </div> <!-- form-group// -->
+	        <div class="form-group input-group p-1">
+    	        <div class="input-group-prepend">
+		            <span class="input-group-text"> <i class="fa fa-address-card p-1"></i> </span>
+		         </div>
+                <input  asp-for="AcademicianRequestModel.IdentityNo" name="IdentityNo" class="form-control" placeholder="Kimlik No" type="text">
+            </div>
+            <!-- Button Group-->
+            <label asp-for="AcademicianRequestModel.IsAssistant" class="px-1" >Asistan mı?</label>
+            <div class="w-100 btn-group p-1" role="group" aria-label="Basic radio toggle button group">
+          <input  type="radio" class="btn-check" name="btnradio" value="true" id="btnradio1" autocomplete="off" checked>
+          <label asp-for="AcademicianRequestModel.IsAssistant" class="btn btn-outline-primary" for="btnradio1" >Asistan</label>
+
+          <input asp-for="AcademicianRequestModel.IsAssistant" type="radio" class="btn-check" name="btnradio" value="false" id="btnradio2" autocomplete="off">
+          <label class="btn btn-outline-primary" for="btnradio2">Asistan Değil</label>
+        </div>      
+            <!--Button Group End-->
+
+        <!-- form-group// -->      
                                                              
-</form>
-</article>
-</div> <!-- card.// -->
 
-</div> 
-<!--container end.//-->
+        </article>
+        </div> <!-- card.// -->
+                    </div>
+                          <div class="modal-footer">
+                <button type="button" class="p-1 w-25 btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="p-1 w-50 btn btn-primary"> Kaydet</button>
+              </div>
+              </form>
+              </div>
+            </div>
+       </div>
 
-<br>  <p class="text-center"> </p>
-<hr>
+    <!--Academician ADD Modal End-->
+    <!--Profile Modal Start-->
+       <div id="pageModal" tabindex="-1" aria-hidden="true" class="modal fade">
+        <div class="modal-dialog modal-dialog-scrollable  modal-fullscreen w-75 mx-auto">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="pageModalLabel">Profile Page</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div id="profileModalBody" class="modal-body">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-2"><img src="https://i.pinimg.com/originals/6c/89/66/6c89661628a901db2b078a6af2561a92.png" class="img-thumbnail" alt="Image" /></div>
+                            <div class="col-5">
+                                <h4 id="modalNameTitle" class="py-2">Title FirstName LastName</h4>
+                                <h5 id="modalEmailAdress">Email@@adress.com</h5>
+                            </div>
+                            <div class="col-4">
+                                <div class="py-1"></div>
+                                <span id="modalIsAssistant" class="bg-info rounded-pill p-2 px-sm-5 text-white">Assistant</span>
+                            </div>
+                            <div class="col-1">
+                                <button class="btn btn-outline-warning">
+                                    <i class="w-100 bi bi-pen text-warning" style="font-size:1.5rem;"></i>
+                                </button>
+                                <button class="btn btn-outline-danger">
+                                    <i class="w-100 h-auto bi bi-person-x text-danger" style="font-size:1.5rem;"></i>
+                                </button>
+
+                            </div>
+                        </div>
+
+                        <!--<div class="row">
+                            <div class="col-2"><img src="https://i.pinimg.com/originals/6c/89/66/6c89661628a901db2b078a6af2561a92.png" class="img-thumbnail" alt="Image" /></div>
+                            <div class="col-5">
+                                <h4 id="modalNameTitle" class="py-2">Dr. Tolga Titiz</h4>
+                                <h5 id="modalEmailAdress">tolga.titiz@bakircay.edu.tr</h5>
+                            </div>
+                            <div class="col-4">
+                                <div class="py-1"></div>
+                                <span id="modalIsAssistant" class="bg-info rounded-pill p-2 px-sm-5 text-white">Assistant</span>
+                            </div>
+                            <div class="col-1">
+                                <button class="btn btn-outline-warning">
+                                    <i class="w-100 bi bi-pen text-warning" style="font-size:1.5rem;"></i>
+                                </button>
+                                <button class="btn btn-outline-danger">
+                                    <i class="w-100 h-auto bi bi-person-x text-danger" style="font-size:1.5rem;"></i>
+                                </button>
+
+                            </div>
+                        </div> !-->
+                            <br />
+                            <div class="d-flex justify-content-end">
+                                <form asp-controller="TimeSlot" asp-action="Select" method="get">
+                                    <label for="profileSlotSelection" class="btn btn-outline-secondary mb-1">Edit Slots</label>
+                                    <input id="profileSlotSelection" name="academicianId" type="submit"  class="visually-hidden" value="2" />
+                                </form>
+                            
+                            </div>
+                            
+        <table class="table table-bordered text-center ">
+        <thead class="bg-info bg-gradient">
+        <tr>
+            <th scope="col">#</th>
+            @for(int i=0; i < Model.columnCount ; i++)
+            {
+            <th>
+                @{if(i==0){
+                    <span>Pazartesi</span>
+                }
+                if(i==1){
+                    <span>Salı</span>
+                }
+                if(i==2){
+                    <span>Çarşamba</span>
+                }
+                if(i==3){
+                    <span>Perşembe</span>
+                }
+                if(i==4){
+                    <span>Cuma</span>
+                }
+                if(i==5){
+                    <span>Cumartesi</span>
+                }
+                if(i==6){
+                    <span>Pazar</span>
+                }
+                }
+            </th>
+             }
+        </tr>
+        </thead>
+        <tbody>
+
+            @for(int i=0 ;i< Model.rowCount;i++)
+                        {
+                            <tr>
+                                <th>
+                                        @Model.TimeSlots.ElementAt(i).Slot
+                                </th>
+                                @for (var j = 0; j < Model.columnCount; j++)
+                                {
+                                        <td class="pb-2 align-bottom">
+                                            @{
+                                                string slotId = Model.TimeSlots.ElementAt((j * Model.rowCount) + i).Id.ToString()+"Slot";
+
+                                            <div id="@slotId" class="d-block scheduleCell" >
+                                            
+                                        </div>
+                                        }
+                                        
+                                    </td>
+                                }
+                            </tr>
+                        }
 
 
+        <!--<tr>
+            <th></th>
+            <td class="py-5 bg-info bg-gradient bg-opacity-75">
+                <div style="border: none" >
+                    <p class="text-white">Lecture Code</p>
+                    <small class="text-white opacity-75">Class-Block</small>
+                </div>
+            </td>
+              <td class="pb-2 align-bottom"><div class="d-block badge bg-info" >Available</div></td>
+              <td class="*"><div class="d-block badge bg-dark" >Not Available</div></td>
+              <td class="pb-2 align-bottom bg-dark bg-gradient"><div class="d-block badge bg-dark" >Not Available</div></td>
+              <td class="pb-2 align-bottom bg-dark bg-gradient"><div class="d-block badge bg-dark" >Not Available</div></td>
+        </tr>
+        <tr>
+            <th>TimeSlot2</th>
+            <td class="py-5 bg-info bg-gradient bg-opacity-75">
+                <div style="border: none" >
+                    <p class="text-white">Lecture Code</p>
+                    <small class="text-white opacity-75">Class-Block</small>
+                </div>
+            </td>
+              <td class="pb-2 align-bottom"><div class="d-block badge bg-info" ></div></td>
+              <td class="pb-2 align-bottom bg-dark bg-gradient"><div class="d-block badge bg-dark" >Not Available</div></td>
+              <td class="pb-2 align-bottom bg-dark bg-gradient"><div class="d-block badge bg-dark" >Not Available</div></td>
+              <td class="pb-2 align-bottom bg-dark bg-gradient"><div class="d-block badge bg-dark" >Not Available</div></td>
+        </tr>
+        <tr>
+            <th>TimeSlot3</th>
+            <td class="py-5 bg-info bg-gradient bg-opacity-75">
+                <div style="border: none" >
+                    <p class="text-white">Lecture Code</p>
+                    <small class="text-white opacity-75">Class-Block</small>
+                </div>
+            </td>
+              <td class="pb-2 align-bottom"><div class="d-block badge bg-info" >White Box</div></td>
+              <td class="pb-2 align-bottom bg-dark bg-gradient"><div class="d-block badge bg-info" >Tolga Titiz</div></td>
+              <td class="pb-2 align-bottom bg-dark bg-gradient"><div class="d-block badge bg-info" >Info</div></td>
+              <td class="pb-2 align-bottom bg-dark bg-gradient"><div class="d-block badge bg-dark" >Dark Box</div></td>
+        </tr>!-->
+        </tbody>
+        </table>
+        <div id="courseCodeNameContainer">
+            <strong>Ceng-110</strong> <span>Computer Architecture</span>
+        </div>
+                            
+                        </div>
+                    </div>
+              </div>
+            </div>
+        </div>
+    <!--Profile Modal End-->
 
-  <div class="modal-dialog modal-dialog-centered">
-  ...
-</div>
+    <table id="scheduleTable" class="table table-striped table-bordered mt-5" style="width:100%">
+        <thead>
+            <tr>
+                <th>AcademicianId</th>
+                <th>ClassroomCode</th>
+                <th>CourseCode</th>
+                <th>CourseName</th>
+                <th>TimeSlotId</th>
+                <th>E-SemesterCount</th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+        @{
+            if(Model.AcademicianClassScheduleList != null){
+                for(int i = 0; i < Model.AcademicianClassScheduleList.Count; i++)
+                {
+                    <tr>
+                        <th>
+                        @Model.AcademicianClassScheduleList.ElementAt(i).AcademicianId
+                </th>
+                <td>@Model.AcademicianClassScheduleList.ElementAt(i).ClassroomCode</td>
+                <td>@Model.AcademicianClassScheduleList.ElementAt(i).CourseCode</td>
+                <td>@Model.AcademicianClassScheduleList.ElementAt(i).CourseName</td>
+                <td>@Model.AcademicianClassScheduleList.ElementAt(i).TimeSlotId</td>
+                <td>
+                @Model.AcademicianClassScheduleList.ElementAt(i).SemesterCount
+                </td>
+                </tr>
+            }}
+
+            }
+        </tbody>
+    </table>
+
+    </div>
